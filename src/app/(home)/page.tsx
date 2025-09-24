@@ -69,7 +69,7 @@ const linuxInstallation = `&& unzip -q main.zip \
 export default function HomePage() {
   return (
     <main className='bg-[#0E0E0E]'>
-      <div className='absolute inset-0 overflow-hidden'>
+      <div className='absolute inset-0 w-screen h-full'>
         <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#AD90FF] opacity-50 blur-[10vw] rotate-[105deg] top-[15vh] left-[15vw]' />
         <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#AD90FF] opacity-50 blur-[10vw] rotate-[105deg] top-[90vh] right-[12vw]' />
         <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#AD90FF] opacity-50 blur-[10vw] rotate-[105deg] top-[155vh] left-[12vw]' />
