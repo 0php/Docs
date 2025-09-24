@@ -1,3 +1,14 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/neutral.css';
 @import 'fumadocs-ui/css/preset.css';
+
+.gradient-text {
+    background: linear-gradient(94deg, hsl(var(--zerophp-blue)) 16.78%, hsl(var(--zerophp-purple)) 53.33%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.bg-zerophp-dark {
+    background-color: #0b0d0e;
+}
