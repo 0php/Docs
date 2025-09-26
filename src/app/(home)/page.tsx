@@ -270,9 +270,9 @@ export default function HomePage() {
                   <div className="font-bold text-xl text-white capitalize">{ os }</div>
                   {os === 'windows' ? (
                     <div className='flex items-center gap-3 mb-5'>
-                      <span className='w-6 h-6 text-[11px] border border-[#2D2D4C] flex items-center justify-center'>&#9587;</span>
-                      <span className='w-6 h-6 text-[12px] border border-[#2D2D4C] flex items-center justify-center'>&#10064;</span>
-                      <span className='w-6 h-6 text-[11px] border border-[#2D2D4C] flex items-center justify-center'>&#8212;</span>
+                      <span className='w-6 h-6 text-[11px] text-white border border-[#2D2D4C] flex items-center justify-center'>&#9587;</span>
+                      <span className='w-6 h-6 text-[12px] border text-white border-[#2D2D4C] flex items-center justify-center'>&#10064;</span>
+                      <span className='w-6 h-6 text-[11px] border text-white border-[#2D2D4C] flex items-center justify-center'>&#8212;</span>
                     </div>
                   ) : (
                     <div className='flex items-center gap-3 mb-5'>
@@ -322,15 +322,15 @@ export default function HomePage() {
             </div>
 
             <div className='flex flex-wrap justify-center gap-6 text-sm text-white font-space-grotesk'>
-              <Link href='#' className='hover:text-[#5972E5] transition-colors'>
+              <a href='https://github.com/0php/Zero/blob/main/LICENSE' target='_blank' className='hover:text-[#5972E5] transition-colors'>
                 License
-              </Link>
+              </a>
               <Link href='#' className='hover:text-[#5972E5] transition-colors'>
                 Term of Services
               </Link>
-              <Link href='#' className='hover:text-[#5972E5] transition-colors'>
+              <a href='mailto:hello@syntac.co' className='hover:text-[#5972E5] transition-colors'>
                 Contact Us
-              </Link>
+              </a>
             </div>
           </div>
         </footer>
