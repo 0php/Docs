@@ -96,6 +96,16 @@ php zero migrate
 php zero db:seed
 ```
 
+For zero-downtime deployments, ensure migrations are idempotent and consider running them during maintenance windows.
+
+## Scheduler & Background Jobs
+
+If you implement CLI tasks (e.g., `php zero schedule:run`), configure cron:
+
+```bash
+* * * * * www-data php /var/www/zero-framework/zero schedule:run >> /var/log/zero-schedule.log 2>&1
+```
+
 ## Logging
 
 Logs default to `storage/framework/logs/YYYY-MM-DD.log`. Ensure the directory is writable and consider rotating logs with `logrotate`. For database logging, confirm the `logs` table exists before switching `LOG_DRIVER` to `database`.

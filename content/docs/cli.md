@@ -46,6 +46,14 @@ php zero make:helper randomText
 
 Creates `app/helpers/RandomText.php` with a helper skeleton that exposes a default signature derived from the class name. Register the helper in `app/helpers/Helper.php` so it becomes available globally (for example, `random_text(10)`). Use `--force` to overwrite an existing helper.
 
+### Generate a Console Command
+
+```bash
+php zero make:command HealthCheck --signature=app:health
+```
+
+Creates `app/console/Commands/HealthCheck.php` implementing the `CommandInterface`. The generator also ensures `app/console/Commands/Command.php` exists and appends the new command to its registration list so it is immediately available to the CLI. Provide `--description="..."` to customise the help text and `--force` to overwrite an existing command class.
+
 ### Generate a Model
 
 ```bash
@@ -139,6 +147,14 @@ php zero storage:link
 ```
 
 Creates symbolic links defined in `config/storage.php` (by default linking `public/storage` to the public disk). The command skips existing links and reports missing targets.
+
+### Inspect Registered Routes
+
+```bash
+php zero route:list
+```
+
+Bootstraps `routes/web.php` and prints a table with the HTTP method, URI, route name (when available), controller action, and attached middleware stack. Use it to confirm route bindings after adding groups, name prefixes, or new controllers.
 
 ### Update to Latest Release
 

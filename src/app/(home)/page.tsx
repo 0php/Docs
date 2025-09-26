@@ -78,25 +78,26 @@ export default function HomePage() {
   const [selectedCommand, setSelectedCommand] = useState<string>(commands[0]);
 
   const commandOutputs: Record<string, string[]> = {
-    'Create Project': os === 'windows'
-      ? [
-          'Invoke-WebRequest -Uri "https://github.com/0php/Zero/archive/refs/heads/main.zip" -OutFile "main.zip"; `',
-          'Expand-Archive -Path "main.zip" -DestinationPath "." -Force; `',
-          'Remove-Item "main.zip"; `',
-          'Rename-Item "Zero-main" "my-project"; `',
-          'Set-Location "my-project"; `',
-          'Remove-Item -Recurse -Force docs, todo.md, readme.md; `',
-          'php zero key:generate',
-        ]
-      : [
-          'curl -L -o main.zip https://github.com/0php/Zero/archive/refs/heads/main.zip',
-          '&& unzip -q main.zip \\',
-          '&& rm main.zip \\',
-          '&& mv Zero-main my-project \\',
-          '&& cd my-project \\',
-          '&& rm -rf docs todo.md readme.md .git \\',
-          '&& php zero key:generate',
-        ],
+    'Create Project':
+      os === 'windows'
+        ? [
+            'Invoke-WebRequest -Uri "https://github.com/0php/Zero/archive/refs/heads/main.zip" -OutFile "main.zip"; `',
+            'Expand-Archive -Path "main.zip" -DestinationPath "." -Force; `',
+            'Remove-Item "main.zip"; `',
+            'Rename-Item "Zero-main" "my-project"; `',
+            'Set-Location "my-project"; `',
+            'Remove-Item -Recurse -Force docs, todo.md, readme.md; `',
+            'php zero key:generate',
+          ]
+        : [
+            'curl -L -o main.zip https://github.com/0php/Zero/archive/refs/heads/main.zip',
+            '&& unzip -q main.zip \\',
+            '&& rm main.zip \\',
+            '&& mv Zero-main my-project \\',
+            '&& cd my-project \\',
+            '&& rm -rf docs todo.md readme.md .git \\',
+            '&& php zero key:generate',
+          ],
     'Create Model': ['php zero make:model User'],
     'Create Migration': ['php zero make:migration create_users_table'],
     'Create Seeder': ['php zero make:seeder UsersSeeder'],
@@ -106,10 +107,59 @@ export default function HomePage() {
   };
 
   const isCreateProject = selectedCommand === 'Create Project';
-  const prompt = os === 'windows'
-    ? (isCreateProject ? 'PS C:\\Users\\Zero\\> ' : 'PS C:\\Users\\Zero\\my-project> ')
-    : (isCreateProject ? 'zero@php ~ % ' : 'zero@php ~ my-project % ');
-  
+  const prompt =
+    os === 'windows'
+      ? isCreateProject
+        ? 'PS C:\\Users\\Zero\\> '
+        : 'PS C:\\Users\\Zero\\my-project> '
+      : isCreateProject
+      ? 'zero@php ~ % '
+      : 'zero@php ~ my-project % ';
+
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)');
+    const handleChange = (event: MediaQueryListEvent) => {
+      if (event.matches) {
+        setIsNavOpen(false);
+      }
+    };
+
+    if (mediaQuery.matches) {
+      setIsNavOpen(false);
+    }
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', handleChange);
+    } else {
+      mediaQuery.addListener(handleChange);
+    }
+
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener('change', handleChange);
+      } else {
+        mediaQuery.removeListener(handleChange);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isNavOpen) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsNavOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isNavOpen]);
+
   return (
     <main className='bg-[#0E0E0E]'>
       <div className='absolute inset-0 w-screen h-full overflow-x-hidden'>
@@ -126,7 +176,7 @@ export default function HomePage() {
         {/* Header */}
 
         <header className='w-full fixed top-0 left-0 right-0 z-50 backdrop-blur-md'>
-          <div className='flex justify-between items-center px-4 py-6 w-full max-w-[1224px] mx-auto'>
+          <div className='flex justify-between items-center px-4 py-6 w-full max-w-[1224px] mx-auto relative'>
             <div className='text-white relative text-2xl font-medium font-space-grotesk'>
               ZeroPHP
             </div>
@@ -143,13 +193,15 @@ export default function HomePage() {
               >
                 Installations
               </a>
-              <Link href="/docs"
+              <Link
+                href='/docs'
                 className='text-white text font-space-grotesk underline hover:text-zerophp-purple transition-colors'
               >
                 Documentations
               </Link>
               <a
-                href="https://github.com/0php/Zero/" target="_blank"
+                href='https://github.com/0php/Zero/'
+                target='_blank'
                 className='text-white hover:text-zerophp-purple transition-colors'
               >
                 <svg
@@ -170,32 +222,129 @@ export default function HomePage() {
                 </svg>
               </a>
             </nav>
-            <button className='lg:hidden text-white'>
-              <svg
-                className='w-6 h-6'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth='2'
-                  d='M4 6h16M4 12h16M4 18h16'
-                />
-              </svg>
+            <button
+              type='button'
+              onClick={() => setIsNavOpen((prev) => !prev)}
+              className='lg:hidden text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5972E5] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0E0E0E] rounded-md p-1'
+              aria-expanded={isNavOpen}
+              aria-controls='mobile-nav'
+              aria-label='Toggle navigation'
+            >
+              {isNavOpen ? (
+                <svg
+                  className='w-6 h-6'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    d='M6 18L18 6M6 6l12 12'
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className='w-6 h-6'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    d='M4 6h16M4 12h16M4 18h16'
+                  />
+                </svg>
+              )}
             </button>
+
+            {isNavOpen && (
+              <nav
+                id='mobile-nav'
+                className='lg:hidden fixed inset-0 z-50 flex flex-col gap-6 px-6 pt-16 pb-12 w-screen h-screen bg-[#0E0E0E] text-white font-space-grotesk text-lg overflow-y-auto'
+              >
+                <div className='flex justify-end mb-6'>
+                  <button
+                    type='button'
+                    onClick={() => setIsNavOpen(false)}
+                    className='p-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5972E5] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0E0E0E]'
+                    aria-label='Close navigation'
+                  >
+                    <svg
+                      className='w-6 h-6'
+                      fill='none'
+                      stroke='currentColor'
+                      viewBox='0 0 24 24'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
+                        d='M6 18L18 6M6 6l12 12'
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <a
+                  href='#features'
+                  className='underline underline-offset-2'
+                  onClick={() => setIsNavOpen(false)}
+                >
+                  Features
+                </a>
+                <a
+                  href='#installation'
+                  className='underline underline-offset-2'
+                  onClick={() => setIsNavOpen(false)}
+                >
+                  Installations
+                </a>
+                <Link
+                  href='/docs'
+                  className='underline underline-offset-2'
+                  onClick={() => setIsNavOpen(false)}
+                >
+                  Documentations
+                </Link>
+                <a
+                  href='https://github.com/0php/Zero/'
+                  target='_blank'
+                  rel='noreferrer'
+                  className='flex items-center gap-2 underline underline-offset-2'
+                  onClick={() => setIsNavOpen(false)}
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='20'
+                    height='20'
+                    viewBox='0 0 24 24'
+                    fill='none'
+                    stroke='currentColor'
+                    strokeWidth='2'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    aria-hidden='true'
+                  >
+                    <path d='M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4' />
+                    <path d='M9 18c-4.51 2-5-2-7-2' />
+                  </svg>
+                  GitHub
+                </a>
+              </nav>
+            )}
           </div>
         </header>
+
         {/* Hero Section */}
         <section className='px-6 lg:px-[155px] pb-40 pt-50 lg:py-[25vh] text-center'>
           <div className='max-w-[1131px] mx-auto'>
             <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold font-space-grotesk mb-6 leading-tight'>
               <span className='text-white'>ZeroPHP is</span>
               <br />
-              <span className='text-styled'>
-                Dependency-Free Framework
-              </span>
+              <span className='text-styled'>Dependency-Free Framework</span>
             </h1>
             <p className='text-white text-xl lg:text-2xl font-space-grotesk max-w-[1131px] mx-auto mb-12 leading-relaxed'>
               It's designed to be simple — no need to install or maintain
@@ -205,21 +354,25 @@ export default function HomePage() {
             <div className='flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-12'>
               <div className='relative'>
                 <div className='absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-[190px] h-[42px] bg-blue/40 blur-[32px] rounded-full' />
-                <a href="#installation" className='inline-flex text-black items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 bg-white text-zerophp-dark font-space-grotesk px-6 py-2 rounded-[14px] hover:bg-white/90 relative z-10'>
+                <a
+                  href='#installation'
+                  className='inline-flex text-black items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 bg-white text-zerophp-dark font-space-grotesk px-6 py-2 rounded-[14px] hover:bg-white/90 relative z-10'
+                >
                   Installation Guides
                 </a>
               </div>
-              <Link href="/docs"
+              <Link
+                href='/docs'
                 className='text-white font-space-grotesk underline hover:text-zerophp-purple transition-colors'
               >
-                Read Documentations 
+                Read Documentations
               </Link>
             </div>
           </div>
         </section>
         {/* ... previous sections ... */}
         {/* Features Section */}
-        <section id="features" className='px-6 lg:px-[108px] py-16 lg:py-24'>
+        <section id='features' className='px-6 lg:px-[108px] py-16 lg:py-24'>
           <div className='max-w-[1224px] mx-auto'>
             <h2 className='text-center text-3xl lg:text-4xl font-bold font-space-grotesk text-styled mb-12'>
               Zero Dependencies, Rich Features
@@ -244,19 +397,26 @@ export default function HomePage() {
           </div>
         </section>
         {/* Zero CLI Section */}
-        <section id="installation" className='px-4 py-16 lg:py-24 max-w-[1224px] mx-auto'>
+        <section
+          id='installation'
+          className='px-4 py-16 lg:py-24 max-w-[1224px] mx-auto'
+        >
           <h2 className='text-center text-3xl lg:text-4xl font-bold font-space-grotesk mb-12'>
             <span className='text-styled'>Zero CLI</span>
           </h2>
           <div className='flex flex-col lg:flex-row md:gap-12 gap-6 mx-auto'>
             <div className='lg:w-[20%]'>
-              <div className='flex flex-row lg:flex-col md:gap-3 gap-5 flex-nowrap overflow-scroll pb-2'>
+              <div className='flex flex-row lg:flex-col md:gap-3 gap-5 flex-nowrap overflow-y-auto pb-2'>
                 {commands.map((cmd) => (
                   <button
                     key={cmd}
-                    type="button"
+                    type='button'
                     onClick={() => setSelectedCommand(cmd)}
-                    className={`text-left cursor-pointer whitespace-nowrap md:text-2xl text-xl font-bold font-space-grotesk transition-colors ${selectedCommand === cmd ? 'text-styled' : 'text-white hover:text-styled'}`}
+                    className={`text-left cursor-pointer whitespace-nowrap md:text-2xl text-xl font-bold font-space-grotesk transition-colors ${
+                      selectedCommand === cmd
+                        ? 'text-styled'
+                        : 'text-white hover:text-styled'
+                    }`}
                   >
                     {cmd}
                   </button>
@@ -266,13 +426,21 @@ export default function HomePage() {
 
             <div className='flex-1 rounded-[20px] border border-[#2D2D4C] bg-[linear-gradient(120deg,rgba(22,27,38,0.10)_2.43%,rgba(14,14,14,0.20)_99.14%)]'>
               <div className='rounded-[20px] md:p-8 p-6'>
-                <div className="flex w-full justify-between items-center mb-3">
-                  <div className="font-bold text-xl text-white capitalize">{ os }</div>
+                <div className='flex w-full justify-between items-center mb-3'>
+                  <div className='font-bold text-xl text-white capitalize'>
+                    {os}
+                  </div>
                   {os === 'windows' ? (
                     <div className='flex items-center gap-3 mb-5'>
-                      <span className='w-6 h-6 text-[11px] text-white border border-[#2D2D4C] flex items-center justify-center'>&#9587;</span>
-                      <span className='w-6 h-6 text-[12px] border text-white border-[#2D2D4C] flex items-center justify-center'>&#10064;</span>
-                      <span className='w-6 h-6 text-[11px] border text-white border-[#2D2D4C] flex items-center justify-center'>&#8212;</span>
+                      <span className='w-6 h-6 text-[11px] text-white border border-[#2D2D4C] flex items-center justify-center'>
+                        &#9587;
+                      </span>
+                      <span className='w-6 h-6 text-[12px] border text-white border-[#2D2D4C] flex items-center justify-center'>
+                        &#10064;
+                      </span>
+                      <span className='w-6 h-6 text-[11px] border text-white border-[#2D2D4C] flex items-center justify-center'>
+                        &#8212;
+                      </span>
                     </div>
                   ) : (
                     <div className='flex items-center gap-3 mb-5'>
@@ -289,7 +457,9 @@ export default function HomePage() {
                       {commandOutputs[selectedCommand].map((line, idx) => (
                         <p key={idx} className='break-all'>
                           {idx === 0 && (
-                            <span className='text-[#5972E5] font-bold'>{prompt}</span>
+                            <span className='text-[#5972E5] font-bold'>
+                              {prompt}
+                            </span>
                           )}
                           {line}
                         </p>
@@ -322,13 +492,20 @@ export default function HomePage() {
             </div>
 
             <div className='flex flex-wrap justify-center gap-6 text-sm text-white font-space-grotesk'>
-              <a href='https://github.com/0php/Zero/blob/main/LICENSE' target='_blank' className='hover:text-[#5972E5] transition-colors'>
+              <a
+                href='https://github.com/0php/Zero/blob/main/LICENSE'
+                target='_blank'
+                className='hover:text-[#5972E5] transition-colors'
+              >
                 License
               </a>
               <Link href='#' className='hover:text-[#5972E5] transition-colors'>
                 Term of Services
               </Link>
-              <a href='mailto:hello@syntac.co' className='hover:text-[#5972E5] transition-colors'>
+              <a
+                href='mailto:hello@syntac.co'
+                className='hover:text-[#5972E5] transition-colors'
+              >
                 Contact Us
               </a>
             </div>
