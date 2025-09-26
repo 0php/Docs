@@ -218,7 +218,7 @@ export default function HomePage() {
         </section>
         {/* ... previous sections ... */}
         {/* Features Section */}
-        <section className='px-6 lg:px-[108px] py-16 lg:py-24'>
+        <section id="features" className='px-6 lg:px-[108px] py-16 lg:py-24'>
           <div className='max-w-[1224px] mx-auto'>
             <h2 className='text-center text-3xl lg:text-4xl font-bold font-space-grotesk text-styled mb-12'>
               Zero Dependencies, Rich Features
