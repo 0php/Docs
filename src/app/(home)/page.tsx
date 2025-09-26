@@ -107,12 +107,12 @@ export default function HomePage() {
 
   const isCreateProject = selectedCommand === 'Create Project';
   const prompt = os === 'windows'
-    ? (isCreateProject ? 'C:\\Users\\Zero\\> ' : 'C:\\Users\\Zero\\my-project> ')
+    ? (isCreateProject ? 'PS C:\\Users\\Zero\\> ' : 'PS C:\\Users\\Zero\\my-project> ')
     : (isCreateProject ? 'zero@php ~ % ' : 'zero@php ~ my-project % ');
   
   return (
     <main className='bg-[#0E0E0E]'>
-      <div className='absolute inset-0 w-screen h-full'>
+      <div className='absolute inset-0 w-screen h-full overflow-x-hidden'>
         <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#AD90FF] opacity-50 blur-[10vw] rotate-[105deg] top-[15vh] left-[15vw] pulse-1' />
         <div className='absolute w-[36vw] h-[36vh] rounded-full bg-[#0554CB] opacity-50 blur-[10vw] rotate-[38deg] bottom-[34vh] right-[25vw] pulse-2' />
         <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#AD90FF] opacity-50 blur-[10vw] rotate-[105deg] top-[110vh] right-[12vw] pulse-3' />
@@ -188,7 +188,7 @@ export default function HomePage() {
           </div>
         </header>
         {/* Hero Section */}
-        <section className='px-6 lg:px-[155px] py-16 lg:py-[25vh] text-center'>
+        <section className='px-6 lg:px-[155px] pb-40 pt-50 lg:py-[25vh] text-center'>
           <div className='max-w-[1131px] mx-auto'>
             <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold font-space-grotesk mb-6 leading-tight'>
               <span className='text-white'>ZeroPHP is</span>
@@ -248,15 +248,15 @@ export default function HomePage() {
           <h2 className='text-center text-3xl lg:text-4xl font-bold font-space-grotesk mb-12'>
             <span className='text-styled'>Zero CLI</span>
           </h2>
-          <div className='flex flex-col lg:flex-row gap-12 mx-auto'>
+          <div className='flex flex-col lg:flex-row md:gap-12 gap-6 mx-auto'>
             <div className='lg:w-[20%]'>
-              <div className='flex flex-col gap-3'>
+              <div className='flex flex-row lg:flex-col md:gap-3 gap-5 flex-nowrap overflow-scroll pb-2'>
                 {commands.map((cmd) => (
                   <button
                     key={cmd}
                     type="button"
                     onClick={() => setSelectedCommand(cmd)}
-                    className={`text-left cursor-pointer text-2xl font-bold font-space-grotesk transition-colors ${selectedCommand === cmd ? 'text-styled' : 'text-white hover:text-styled'}`}
+                    className={`text-left cursor-pointer whitespace-nowrap md:text-2xl text-xl font-bold font-space-grotesk transition-colors ${selectedCommand === cmd ? 'text-styled' : 'text-white hover:text-styled'}`}
                   >
                     {cmd}
                   </button>
@@ -265,7 +265,7 @@ export default function HomePage() {
             </div>
 
             <div className='flex-1 rounded-[20px] border border-[#2D2D4C] bg-[linear-gradient(120deg,rgba(22,27,38,0.10)_2.43%,rgba(14,14,14,0.20)_99.14%)]'>
-              <div className='rounded-[20px] p-8'>
+              <div className='rounded-[20px] md:p-8 p-6'>
                 <div className="flex w-full justify-between items-center mb-3">
                   <div className="font-bold text-xl text-white capitalize">{ os }</div>
                   {os === 'windows' ? (
@@ -287,7 +287,7 @@ export default function HomePage() {
                   <div>
                     <div className='text-white font-bold flex flex-col gap-2 text-pretty'>
                       {commandOutputs[selectedCommand].map((line, idx) => (
-                        <p key={idx}>
+                        <p key={idx} className='break-all'>
                           {idx === 0 && (
                             <span className='text-[#5972E5] font-bold'>{prompt}</span>
                           )}
@@ -304,7 +304,7 @@ export default function HomePage() {
         {/* Footer Section */}
         <footer className='px-6 lg:px-[108px] py-8'>
           <div className='flex flex-col lg:flex-row justify-between items-center gap-6 max-w-[1224px] mx-auto'>
-            <div className='flex flex-col lg:flex-row items-center gap-1 text-white font-space-grotesk'>
+            <div className='flex items-center gap-1 text-white font-space-grotesk'>
               <span>Developed by</span>
               <a
                 href='https://syntac.co'
