@@ -1,0 +1,27 @@
+.pulse-1 {
+    animation: pulse 6s ease-in-out infinite;
+}
+
+.pulse-2 {
+    animation: pulse 7s ease-in-out infinite;
+}
+
+.pulse-3 {
+    animation: pulse 4s ease-in-out infinite;
+}
+
+.pulse-4 {
+    animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50%      { opacity: 0.2; }
+}
+
+.text-styled {
+    background: linear-gradient(94deg, #0554CB 16.78%, #AD90FF 53.33%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

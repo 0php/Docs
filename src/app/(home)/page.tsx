@@ -1,6 +1,24 @@
+'use client';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import './page.css';
-import { Fragment } from 'react';
+
+const useOS = () => {
+  const [os, setOs] = useState<'mac' | 'windows' | 'linux'>('linux');
+
+  useEffect(() => {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    if (userAgent.includes('mac')) {
+      setOs('mac');
+    } else if (userAgent.includes('win')) {
+      setOs('windows');
+    } else {
+      setOs('linux');
+    }
+  }, []);
+
+  return os;
+};
 
 const features = [
   {
@@ -45,7 +63,8 @@ const features = [
   },
 ];
 
-const installationSteps = [
+const commands = [
+  'Create Project',
   'Create Model',
   'Create Migration',
   'Create Seeder',
@@ -54,29 +73,53 @@ const installationSteps = [
   'Update ZeroPHP',
 ];
 
-const linuxInstallation = `&& unzip -q main.zip \
-
-&& rm main.zip \
-
-&& mv Zero-main my-project \
-
-&& cd my-project \
-
-&& rm -rf docs todo.md readme.md .git \
-
-&& php zero key:generate`;
-
 export default function HomePage() {
+  const os = useOS();
+  const [selectedCommand, setSelectedCommand] = useState<string>(commands[0]);
+
+  const commandOutputs: Record<string, string[]> = {
+    'Create Project': os === 'windows'
+      ? [
+          'Invoke-WebRequest -Uri "https://github.com/0php/Zero/archive/refs/heads/main.zip" -OutFile "main.zip"; `',
+          'Expand-Archive -Path "main.zip" -DestinationPath "." -Force; `',
+          'Remove-Item "main.zip"; `',
+          'Rename-Item "Zero-main" "my-project"; `',
+          'Set-Location "my-project"; `',
+          'Remove-Item -Recurse -Force docs, todo.md, readme.md; `',
+          'php zero key:generate',
+        ]
+      : [
+          'curl -L -o main.zip https://github.com/0php/Zero/archive/refs/heads/main.zip',
+          '&& unzip -q main.zip \\',
+          '&& rm main.zip \\',
+          '&& mv Zero-main my-project \\',
+          '&& cd my-project \\',
+          '&& rm -rf docs todo.md readme.md .git \\',
+          '&& php zero key:generate',
+        ],
+    'Create Model': ['php zero make:model User'],
+    'Create Migration': ['php zero make:migration create_users_table'],
+    'Create Seeder': ['php zero make:seeder UsersSeeder'],
+    'Create Controller': ['php zero make:controller UserController'],
+    'Create Helper': ['php zero make:helper HelperName'],
+    'Update ZeroPHP': ['php updater'],
+  };
+
+  const isCreateProject = selectedCommand === 'Create Project';
+  const prompt = os === 'windows'
+    ? (isCreateProject ? 'C:\\Users\\Zero\\> ' : 'C:\\Users\\Zero\\my-project> ')
+    : (isCreateProject ? 'zero@php ~ % ' : 'zero@php ~ my-project % ');
+  
   return (
     <main className='bg-[#0E0E0E]'>
       <div className='absolute inset-0 w-screen h-full'>
-        <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#AD90FF] opacity-50 blur-[10vw] rotate-[105deg] top-[15vh] left-[15vw]' />
-        <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#AD90FF] opacity-50 blur-[10vw] rotate-[105deg] top-[90vh] right-[12vw]' />
-        <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#AD90FF] opacity-50 blur-[10vw] rotate-[105deg] top-[155vh] left-[12vw]' />
-        <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#0554CB] opacity-50 blur-[10vw] rotate-[92deg] top-[95vh] left-[35vw]' />
-        <div className='absolute w-[50vw] h-[45vh] rounded-full bg-[#0554CB] opacity-50 blur-[10vw] rotate-[38deg] top-[10vh] right-[15vw]' />
-        <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#0554CB] opacity-50 blur-[10vw] rotate-[38deg] top-[34vh] left-[55vw]' />
-        <div className='absolute w-[36vw] h-[36vh] rounded-full bg-[#0554CB] opacity-50 blur-[10vw] rotate-[38deg] bottom-[34vh] right-[25vw]' />
+        <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#AD90FF] opacity-50 blur-[10vw] rotate-[105deg] top-[15vh] left-[15vw] pulse-1' />
+        <div className='absolute w-[36vw] h-[36vh] rounded-full bg-[#0554CB] opacity-50 blur-[10vw] rotate-[38deg] bottom-[34vh] right-[25vw] pulse-2' />
+        <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#AD90FF] opacity-50 blur-[10vw] rotate-[105deg] top-[110vh] right-[12vw] pulse-3' />
+        <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#AD90FF] opacity-50 blur-[10vw] rotate-[105deg] top-[180vh] right-[12vw] pulse-4' />
+        <div className='absolute w-[60vw] h-[40vh] rounded-full bg-[#0554CB] opacity-50 blur-[15vw] top-[80vh] right-[35vw] pulse-2' />
+        <div className='absolute w-[40vw] h-[40vh] rounded-full bg-[#0554CB] opacity-50 blur-[10vw] rotate-[38deg] top-[140vh] left-[10vw] pulse-3' />
+        <div className='absolute w-[35vw] h-[36vh] rounded-full bg-[#0554CB] opacity-50 blur-[10vw] rotate-[38deg] top-[34vh] left-[55vw] pulse-4' />
       </div>
 
       <div className='min-h-screen relative overflow-hidden z-20'>
@@ -99,12 +142,11 @@ export default function HomePage() {
             >
               Installation
             </a>
-            <a
-              href='#'
+            <Link href="docs"
               className='text-white text-lg font-space-grotesk underline hover:text-zerophp-purple transition-colors'
             >
               Documentation
-            </a>
+            </Link>
             <a
               href='#'
               className='text-white hover:text-zerophp-purple transition-colors'
@@ -144,12 +186,12 @@ export default function HomePage() {
           </button>
         </header>
         {/* Hero Section */}
-        <section className='px-6 lg:px-[155px] py-16 lg:py-24 text-center'>
+        <section className='px-6 lg:px-[155px] py-16 lg:py-[25vh] text-center'>
           <div className='max-w-[1131px] mx-auto'>
             <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold font-space-grotesk mb-6 leading-tight'>
               <span className='text-white'>ZeroPHP is</span>
               <br />
-              <span className='bg-[linear-gradient(94deg,#0554CB_16.78%,#AD90FF_53.33%)] bg-clip-text text-transparent'>
+              <span className='text-styled'>
                 Dependency-Free Framework
               </span>
             </h1>
@@ -161,9 +203,9 @@ export default function HomePage() {
             <div className='flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-12'>
               <div className='relative'>
                 <div className='absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-[190px] h-[42px] bg-blue/40 blur-[32px] rounded-full' />
-                <button className='inline-flex text-black items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 bg-white text-zerophp-dark font-space-grotesk px-6 py-2 rounded-[14px] hover:bg-white/90 relative z-10'>
+                <a href="#" className='inline-flex text-black items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 bg-white text-zerophp-dark font-space-grotesk px-6 py-2 rounded-[14px] hover:bg-white/90 relative z-10'>
                   Installation Guides
-                </button>
+                </a>
               </div>
               <a
                 href='#'
@@ -178,7 +220,7 @@ export default function HomePage() {
         {/* Features Section */}
         <section className='px-6 lg:px-[108px] py-16 lg:py-24'>
           <div className='max-w-[1224px] mx-auto'>
-            <h2 className='text-center text-3xl lg:text-4xl font-bold font-space-grotesk bg-[linear-gradient(94deg,#0554CB_16.78%,#AD90FF_53.33%)] bg-clip-text text-transparent mb-12'>
+            <h2 className='text-center text-3xl lg:text-4xl font-bold font-space-grotesk text-styled mb-12'>
               Zero Dependencies, Rich Features
             </h2>
 
@@ -200,42 +242,58 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        {/* Installation Section */}
-        <section className='px-6 lg:px-[108px] py-16 lg:py-24'>
-          <div className='flex flex-col lg:flex-row gap-12 max-w-[1224px] mx-auto'>
-            <div className='lg:w-[264px]'>
-              <div className='space-y-4'>
-                <h3 className='text-2xl font-bold font-space-grotesk bg-[linear-gradient(94deg,#0554CB_16.78%,#AD90FF_53.33%)] bg-clip-text text-transparent'>
-                  Install ZeroPHP
-                </h3>
-                <div className='space-y-3 text-white font-space-grotesk text-xl lg:text-2xl font-bold'>
-                  {installationSteps.map((step, index) => (
-                    <div key={index}>{step}</div>
-                  ))}
-                </div>
+        {/* Zero CLI Section */}
+        <section className='px-4 py-16 lg:py-24 max-w-[1224px] mx-auto'>
+          <h2 className='text-center text-3xl lg:text-4xl font-bold font-space-grotesk mb-12'>
+            <span className='text-styled'>Zero CLI</span>
+          </h2>
+          <div className='flex flex-col lg:flex-row gap-12 mx-auto'>
+            <div className='lg:w-[20%]'>
+              <div className='flex flex-col gap-3'>
+                {commands.map((cmd) => (
+                  <button
+                    key={cmd}
+                    type="button"
+                    onClick={() => setSelectedCommand(cmd)}
+                    className={`text-left cursor-pointer text-2xl font-bold font-space-grotesk transition-colors ${selectedCommand === cmd ? 'text-styled' : 'text-white hover:text-styled'}`}
+                  >
+                    {cmd}
+                  </button>
+                ))}
               </div>
             </div>
 
             <div className='flex-1 rounded-[20px] border border-[#2D2D4C] bg-[linear-gradient(120deg,rgba(22,27,38,0.10)_2.43%,rgba(14,14,14,0.20)_99.14%)]'>
-              <div className='glass-card rounded-[20px] p-8 lg:max-w-[832px]'>
-                <div className='flex items-center gap-3 mb-5'>
-                  <div className='w-3 h-3 rounded-full bg-red-500'></div>
-                  <div className='w-3 h-3 rounded-full bg-yellow-500'></div>
-                  <div className='w-3 h-3 rounded-full bg-green-500'></div>
+              <div className='rounded-[20px] p-8'>
+                <div className="flex w-full justify-between items-center mb-3">
+                  <div className="font-bold text-xl text-white capitalize">{ os }</div>
+                  {os === 'windows' ? (
+                    <div className='flex items-center gap-3 mb-5'>
+                      <span className='w-6 h-6 text-[11px] border border-[#2D2D4C] flex items-center justify-center'>&#9587;</span>
+                      <span className='w-6 h-6 text-[12px] border border-[#2D2D4C] flex items-center justify-center'>&#10064;</span>
+                      <span className='w-6 h-6 text-[11px] border border-[#2D2D4C] flex items-center justify-center'>&#8212;</span>
+                    </div>
+                  ) : (
+                    <div className='flex items-center gap-3 mb-5'>
+                      <div className='w-3 h-3 rounded-full bg-red-500'></div>
+                      <div className='w-3 h-3 rounded-full bg-yellow-500'></div>
+                      <div className='w-3 h-3 rounded-full bg-green-500'></div>
+                    </div>
+                  )}
                 </div>
 
                 <div className='space-y-1 font-space-grotesk text-base'>
                   <div>
-                    <span className='text-[#5972E5] font-bold'>
-                      syntac@zero ~ %{' '}
-                    </span>
-                    <span className='text-white font-bold'>
-                      curl -L -o main.zip
-                      https://github.com/0php/Zero/archive/refs/heads/main.zip
-                    </span>
-                    <span className='text-white font-bold'>
-                      <pre className='leading-relaxed'>{linuxInstallation}</pre>
-                    </span>
+                    <div className='text-white font-bold flex flex-col gap-2 text-pretty'>
+                      {commandOutputs[selectedCommand].map((line, idx) => (
+                        <p key={idx}>
+                          {idx === 0 && (
+                            <span className='text-[#5972E5] font-bold'>{prompt}</span>
+                          )}
+                          {line}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -245,7 +303,7 @@ export default function HomePage() {
         {/* Footer Section */}
         <footer className='px-6 lg:px-[108px] py-8'>
           <div className='flex flex-col lg:flex-row justify-between items-center gap-6 max-w-[1224px] mx-auto'>
-            <div className='flex flex-col lg:flex-row items-center gap-2 lg:gap-2 text-white font-space-grotesk text-lg font-bold'>
+            <div className='flex flex-col lg:flex-row items-center gap-1 text-white font-space-grotesk'>
               <span>Developed by</span>
               <a
                 href='https://syntac.co'
@@ -258,7 +316,7 @@ export default function HomePage() {
                 href='https://bytelogic.me'
                 className='hover:text-blue transition-colors'
               >
-                BeteLogic
+                ByteLogic
               </a>
             </div>
 
