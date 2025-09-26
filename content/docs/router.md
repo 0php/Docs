@@ -68,7 +68,7 @@ class AuthMiddleware
 }
 ```
 
-Middleware can use request attributes to share expensive work with controllers or subsequent middleware. See [Request Attributes](request-response.md#request-attributes) for the full API.
+Middleware can use request attributes to share expensive work with controllers or subsequent middleware. See [Request Attributes](/docs/request-response#request-attributes) for the full API.
 
 You can also pass parameters to middleware when registering routes:
 
@@ -79,6 +79,41 @@ Router::group(['middleware' => [AuthMiddleware::class, [RoleMiddleware::class, '
 ```
 
 In this example `RoleMiddleware::handle()` receives the current request followed by `'admin'`. Any additional arguments declared after the request will be resolved from the route definition order.
+
+### Group Name Prefixes
+
+Route groups accept a `name` attribute that composes a dot-notated prefix for every nested route:
+
+```php
+Router::group(['prefix' => '/auth', 'name' => 'auth'], function () {
+    Router::get('/login', [AuthController::class, 'showLogin'])->name('login.show');
+    Router::post('/login', [AuthController::class, 'login'])->name('login.attempt');
+});
+```
+
+The example above registers the `auth.login.show` and `auth.login.attempt` route names while still applying the `/auth` URI prefix.
+
+## Named Routes and URL Generation
+
+Assign a name to any route definition to reference it later:
+
+```php
+Router::get('/profile/{user}', [ProfileController::class, 'show'])
+    ->name('profile.show');
+```
+
+- Route names must be unique; reusing a name for a different path or HTTP verb raises an exception during bootstrap.
+- Nested group prefixes automatically prepend to route names (see [Group Name Prefixes](#group-name-prefixes)).
+
+Generate URLs via the global `route($name, $parameters = [], $absolute = true)` helper or the underlying `Router::route()` method:
+
+```php
+$url = route('profile.show', ['user' => 42]); // https://example.com/profile/42
+
+Response::redirectRoute('profile.show', ['user' => 42]);
+```
+
+Placeholders are replaced with URL-encoded parameters and removed from the query string. Any remaining array values are appended as standard `?key=value` pairs. Pass `false` as the third argument to receive a relative path (`/profile/42`).
 
 ## Error Handling
 

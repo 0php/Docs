@@ -15,27 +15,27 @@ Zero Framework is a lightweight, native-PHP micro-framework inspired by Laravel'
 - **Views**: `Zero\Lib\View` renders PHP templates with Blade-inspired directives, layout/section support, and optional caching.
 - **Database access (DBML)**: `Zero\Lib\DB\DBML`—the Database Management Layer—provides a fluent query builder atop the framework's PDO bridge.
 - **Models**: `Zero\Lib\Model` offers an active-record style abstraction that hydrates results into rich PHP objects.
-- **Helpers**: `registerHelper()` wires app-specific helper classes into globally callable functions (generate stubs with `php zero make:helper`).
+- **Helpers**: The `RegistersHelpers` trait (backed by `HelperRegistry`) wires app-specific helper classes into globally callable functions (generate stubs with `php zero make:helper`).
 - **Migrations & Seeders (DBAL)**: CLI commands (`migrate`, `make:migration`, `db:seed`) drive the migration DBAL for schema changes and database seeding.
 - **Mailing**: `Zero\Lib\Mail\Mailer` wraps SMTP delivery with fluent message composition and dotenv-driven configuration.
-- **HTTP Client**: [`Zero\Lib\Http\Http`](support.md#http-client) exposes a fluent, cURL-backed client for outbound requests with JSON helpers and timeout configuration.
-- **String Utilities**: [`Zero\Lib\Support\Str`](support.md#string-helpers) bundles common string transformations (studly, snake, camel, slug, etc.) for CLI and app code.
-- **Storage**: [`Zero\Lib\Storage\Storage`](support.md#storage) writes files to the configured disks; uploaded files call `$file->store()` to persist content.
+- **HTTP Client**: [`Zero\Lib\Http\Http`](/docs/support#http-client) exposes a fluent, cURL-backed client for outbound requests with JSON helpers and timeout configuration.
+- **String Utilities**: [`Zero\Lib\Support\Str`](/docs/support#string-helpers) bundles common string transformations (studly, snake, camel, slug, etc.) for CLI and app code.
+- **Storage**: [`Zero\Lib\Storage\Storage`](/docs/support#storage) writes files to the configured disks; uploaded files call `$file->store()` to persist content.
 
 ## Next Steps
 
-- Explore the [request/response lifecycle](request-response.md) for details on how input is captured and responses are emitted.
-- Review [routing](router.md) to understand grouping, middleware, and parameter binding.
-- Dive into [DBML](dbml.md) for building SQL queries fluently.
-- Explore the [model layer](models.md) to work with active-record style objects.
-- Review the [migrations guide](migrations.md) to learn how to shape tables, tweak charset/collation, and modify columns safely.
-- Review the [CLI tooling](cli.md) for scaffolding, migrations, and seeding workflows.
-- Learn how to compose templates in the [view layer](view.md).
-- Review the [authentication guide](auth.md) for protecting routes and handling sessions.
-- Learn how to send email with the [SMTP mailer](mail.md).
-- Browse the [CLI reference](cli.md) to discover available tooling.
-- Read through the [support utilities](support.md) for the HTTP client and string helper reference.
+- Explore the [request/response lifecycle](/docs/request-response) for details on how input is captured and responses are emitted.
+- Review [routing](/docs/router) to understand grouping, middleware, and parameter binding.
+- Dive into [DBML](/docs/dbml) for building SQL queries fluently.
+- Explore the [model layer](/docs/models) to work with active-record style objects.
+- Review the [migrations guide](/docs/migrations) to learn how to shape tables, tweak charset/collation, and modify columns safely.
+- Review the [CLI tooling](/docs/cli) for scaffolding, migrations, and seeding workflows.
+- Learn how to compose templates in the [view layer](/docs/view).
+- Review the [authentication guide](/docs/auth) for protecting routes and handling sessions.
+- Learn how to send email with the [SMTP mailer](/docs/mail).
+- Browse the [CLI reference](/docs/cli) to discover available tooling.
+- Read through the [support utilities](/docs/support) for the HTTP client and string helper reference.
 
 ## Deployment
 
-For production configuration, consult [docs/deployment.md](deployment.md) for web server examples, environment setup, logging, and post-deploy checklists.
+For production configuration, consult [/docs/deployment](/docs/deployment) for web server examples, environment setup, logging, and post-deploy checklists.
