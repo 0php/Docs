@@ -89,7 +89,7 @@ export default function HomePage() {
             'php zero key:generate',
           ]
         : [
-            'curl -L -o main.zip https://github.com/0php/Zero/archive/refs/heads/main.zip',
+            'curl -L -o main.zip https://github.com/0php/Zero/archive/refs/heads/main.zip \\',
             '&& unzip -q main.zip \\',
             '&& rm main.zip \\',
             '&& mv Zero-main my-project \\',
@@ -231,17 +231,20 @@ export default function HomePage() {
 
               <div className='space-y-1 font-space-grotesk text-base'>
                 <div>
-                  <div className='text-white font-bold flex flex-col gap-2 text-pretty'>
-                    {commandOutputs[selectedCommand].map((line, idx) => (
-                      <p key={idx} className='break-all'>
-                        {idx === 0 && (
-                          <span className='text-[#5972E5] font-bold'>
-                            {prompt}
-                          </span>
-                        )}
-                        {line}
-                      </p>
-                    ))}
+                  <div className='text-white font-bold text-pretty'>
+                    <p className='break-all leading-loose'>
+                      {commandOutputs[selectedCommand].map((line, idx, arr) => (
+                        <>
+                          {idx === 0 && (
+                            <span className='text-[#5972E5] font-bold'>
+                              {prompt}
+                            </span>
+                          )}
+                          {line}
+                          {idx !== arr.length - 1 && <br />}
+                        </>
+                      ))}
+                    </p>
                   </div>
                 </div>
               </div>
