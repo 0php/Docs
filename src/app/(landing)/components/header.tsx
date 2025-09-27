@@ -65,7 +65,7 @@ export default function Header() {
             href='#installation'
             className='text-white text font-space-grotesk underline hover:text-zerophp-purple transition-colors'
           >
-            Installations
+            Installation
           </a>
           <Link
             href='/docs'
