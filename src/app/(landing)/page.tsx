@@ -134,12 +134,12 @@ export default function HomePage() {
           <div className='flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-12'>
             <div className='relative'>
               <div className='absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-[190px] h-[42px] bg-blue/40 blur-[32px] rounded-full' />
-              <a
-                href='#installation'
+              <Link
+                href='/installation'
                 className='inline-flex text-black items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 bg-white text-zerophp-dark font-space-grotesk px-6 py-2 rounded-[14px] hover:bg-white/90 relative z-10'
               >
                 Installation Guides
-              </a>
+              </Link>
             </div>
             <Link
               href='/docs'
