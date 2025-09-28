@@ -164,20 +164,20 @@ export default function Header() {
                 </svg>
               </button>
             </div>
-            <a
-              href='#features'
+            <Link
+              href='/#features'
               className='underline underline-offset-2'
               onClick={() => setIsNavOpen(false)}
             >
               Features
-            </a>
-            <a
-              href='#installation'
+            </Link>
+            <Link
+              href='/installation'
               className='underline underline-offset-2'
               onClick={() => setIsNavOpen(false)}
             >
               Installations
-            </a>
+            </Link>
             <Link
               href='/docs'
               className='underline underline-offset-2'
@@ -185,7 +185,7 @@ export default function Header() {
             >
               Documentations
             </Link>
-            <a
+            <Link
               href='https://github.com/0php/Zero/'
               target='_blank'
               rel='noreferrer'
@@ -208,7 +208,7 @@ export default function Header() {
                 <path d='M9 18c-4.51 2-5-2-7-2' />
               </svg>
               GitHub
-            </a>
+            </Link>
           </nav>
         )}
       </div>
