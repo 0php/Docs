@@ -10,14 +10,10 @@ const inter = Inter({
   subsets: ['latin'],
 });
 
-export default function Layout({ children }: LayoutProps<'/'>) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang='en' className={inter.className} suppressHydrationWarning>
-      <body className='flex flex-col min-h-screen overflow-x-hidden'>
-        <DocsLayout tree={source.pageTree} {...baseOptions()}>
-          <RootProvider>{children}</RootProvider>
-        </DocsLayout>
-      </body>
-    </html>
+    <DocsLayout tree={source.pageTree} {...baseOptions()}>
+      <RootProvider>{children}</RootProvider>
+    </DocsLayout>
   );
 }
