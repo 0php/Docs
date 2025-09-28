@@ -24,6 +24,8 @@ export default function InstallationPage() {
   const [projectName, setProjectName] = useState<string>('');
   const [overrideOS, setOverrideOS] = useState<'' | 'windows' | 'mac' | 'linux'>('');
   const [copied, setCopied] = useState<boolean>(false);
+  // Defer dynamic timestamp to client to avoid hydration mismatch
+  const [nowText, setNowText] = useState<string>('');
 
   const slugify = (value: string) =>
     value
@@ -93,8 +95,13 @@ export default function InstallationPage() {
     return `${dow} ${mon} ${day} ${hh}:${mm}:${ss} ${yyyy}`;
   };
 
+  // Compute timestamp only on client after mount so SSR/CSR markup matches
+  useEffect(() => {
+    setNowText(formatNow());
+  }, []);
+
   return (
-    <section className='px-6 lg:px-[155px] pb-40 pt-25 lg:py-[15vh]'>
+    <section className='px-4 py-6 w-full max-w-[1224px] mx-auto pt-25 lg:py-[15vh]'>
       <div className='max-w-[1224px] mx-auto'>
         <h1 className='text-3xl inline-block lg:text-4xl font-bold font-space-grotesk text-styled mb-8'>
         Installation Guides
@@ -215,7 +222,7 @@ export default function InstallationPage() {
                 <p className='break-all leading-loose'>
                   <span className='text-[#5972E5] font-bold'>{devPrompt}</span>php zero serve<br />
                   <span>Starting PHP server in default mode...</span> <br />
-                  <span>[{formatNow()}] PHP 8.4.12 Development Server (http://127.0.0.1:8000) started</span>
+                  <span>[{nowText}] PHP 8.4.12 Development Server (http://127.0.0.1:8000) started</span>
                 </p>
               </div>
             </div>
