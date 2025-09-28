@@ -152,7 +152,7 @@ export default function HomePage() {
       </section>
       {/* ... previous sections ... */}
       {/* Features Section */}
-      <section id='features' className='px-6 lg:px-[108px] py-16 lg:py-24'>
+    <section id='features' className='px-4 py-6 w-full max-w-[1224px] mx-auto py-16 lg:py-24'>
         <div className='max-w-[1224px] mx-auto'>
           <h2 className='text-center text-3xl lg:text-4xl font-bold font-space-grotesk text-styled mb-12'>
             Zero Dependencies, Rich Features
@@ -236,7 +236,7 @@ export default function HomePage() {
                   <div className='text-white font-bold text-pretty'>
                     <p className='break-all leading-loose'>
                       {commandOutputs[selectedCommand].map((line, idx, arr) => (
-                        <>
+                        <span key={`${selectedCommand}-${idx}`}>
                           {idx === 0 && (
                             <span className='text-[#5972E5] font-bold'>
                               {prompt}
@@ -244,7 +244,7 @@ export default function HomePage() {
                           )}
                           {line}
                           {idx !== arr.length - 1 && <br />}
-                        </>
+                        </span>
                       ))}
                     </p>
                   </div>
