@@ -39,7 +39,7 @@ export default function InstallationPage() {
   const commandLines: string[] =
     effectiveOS === 'windows'
       ? [
-          'Invoke-WebRequest -Uri "https://github.com/0php/Zero/archive/refs/heads/main.zip" -OutFile "main.zip";',
+          'Invoke-WebRequest -Uri "https://zerophp.com/get/latest.zip" -OutFile "main.zip";',
           'Expand-Archive -Path "main.zip" -DestinationPath "." -Force;',
           'Remove-Item "main.zip";',
           'Rename-Item "Zero-main" "${projectSlug}";',
@@ -49,7 +49,7 @@ export default function InstallationPage() {
           'php zero key:generate',
         ]
       : [
-          'curl -L -o main.zip https://github.com/0php/Zero/archive/refs/heads/main.zip \\',
+          'curl -L -o main.zip https://zerophp.com/get/latest.zip \\',
           '&& unzip -q main.zip \\',
           '&& rm main.zip \\',
           '&& mv Zero-main ${projectSlug} \\',
