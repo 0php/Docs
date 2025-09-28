@@ -80,12 +80,13 @@ export default function HomePage() {
     'Create Project':
       os === 'windows'
         ? [
-            'Invoke-WebRequest -Uri "https://github.com/0php/Zero/archive/refs/heads/main.zip" -OutFile "main.zip"; `',
-            'Expand-Archive -Path "main.zip" -DestinationPath "." -Force; `',
-            'Remove-Item "main.zip"; `',
-            'Rename-Item "Zero-main" "my-project"; `',
-            'Set-Location "my-project"; `',
-            'Remove-Item -Recurse -Force docs, todo.md, readme.md; `',
+            'Invoke-WebRequest -Uri "https://github.com/0php/Zero/archive/refs/heads/main.zip" -OutFile "main.zip";',
+            'Expand-Archive -Path "main.zip" -DestinationPath "." -Force;',
+            'Remove-Item "main.zip";',
+            'Rename-Item "Zero-main" "my-project";',
+            'Set-Location "my-project";',
+            'Remove-Item -Recurse -Force docs, todo.md, readme.md; ',
+            'Copy-Item ".env.example" ".env";',
             'php zero key:generate',
           ]
         : [
@@ -95,6 +96,7 @@ export default function HomePage() {
             '&& mv Zero-main my-project \\',
             '&& cd my-project \\',
             '&& rm -rf docs todo.md readme.md .git \\',
+            '&& cp .env.example .env \\',
             '&& php zero key:generate',
           ],
     'Create Model': ['php zero make:model User'],

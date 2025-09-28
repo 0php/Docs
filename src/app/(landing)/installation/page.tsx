@@ -39,21 +39,23 @@ export default function InstallationPage() {
   const commandLines: string[] =
     effectiveOS === 'windows'
       ? [
-          'Invoke-WebRequest -Uri "https://github.com/0php/Zero/archive/refs/heads/main.zip" -OutFile "main.zip"; `',
-          'Expand-Archive -Path "main.zip" -DestinationPath "." -Force; `',
-          'Remove-Item "main.zip"; `',
-          `Rename-Item "Zero-main" "${projectSlug}"; `,
-          `Set-Location "${projectSlug}"; `,
-          'Remove-Item -Recurse -Force docs, todo.md, readme.md; `',
+          'Invoke-WebRequest -Uri "https://github.com/0php/Zero/archive/refs/heads/main.zip" -OutFile "main.zip";',
+          'Expand-Archive -Path "main.zip" -DestinationPath "." -Force;',
+          'Remove-Item "main.zip";',
+          'Rename-Item "Zero-main" "${projectSlug}";',
+          'Set-Location "${projectSlug}";',
+          'Remove-Item -Recurse -Force docs, todo.md, readme.md; ',
+          'Copy-Item ".env.example" ".env"; ',
           'php zero key:generate',
         ]
       : [
           'curl -L -o main.zip https://github.com/0php/Zero/archive/refs/heads/main.zip \\',
           '&& unzip -q main.zip \\',
           '&& rm main.zip \\',
-          `&& mv Zero-main ${projectSlug} \\`,
-          `&& cd ${projectSlug} \\`,
+          '&& mv Zero-main ${projectSlug} \\',
+          '&& cd ${projectSlug} \\',
           '&& rm -rf docs todo.md readme.md .git \\',
+          '&& cp .env.example .env \\',
           '&& php zero key:generate',
         ];
 
