@@ -52,21 +52,23 @@ export default function Header() {
     <header className='w-full fixed top-0 left-0 right-0 z-50 backdrop-blur-md'>
       <div className='flex justify-between items-center px-4 py-6 w-full max-w-[1224px] mx-auto relative'>
         <div className='text-white relative text-2xl font-medium font-space-grotesk'>
-          ZeroPHP
+          <Link href="/">
+            ZeroPHP
+          </Link>
         </div>
         <nav className='hidden lg:flex items-center gap-6'>
-          <a
-            href='#features'
+          <Link
+            href='/#features'
             className='text-white text font-space-grotesk underline hover:text-zerophp-purple transition-colors'
           >
             Features
-          </a>
-          <a
-            href='#installation'
+          </Link>
+          <Link
+            href='/installation'
             className='text-white text font-space-grotesk underline hover:text-zerophp-purple transition-colors'
           >
-            Installations
-          </a>
+            Installation
+          </Link>
           <Link
             href='/docs'
             className='text-white text font-space-grotesk underline hover:text-zerophp-purple transition-colors'
@@ -162,20 +164,20 @@ export default function Header() {
                 </svg>
               </button>
             </div>
-            <a
-              href='#features'
+            <Link
+              href='/#features'
               className='underline underline-offset-2'
               onClick={() => setIsNavOpen(false)}
             >
               Features
-            </a>
-            <a
-              href='#installation'
+            </Link>
+            <Link
+              href='/installation'
               className='underline underline-offset-2'
               onClick={() => setIsNavOpen(false)}
             >
               Installations
-            </a>
+            </Link>
             <Link
               href='/docs'
               className='underline underline-offset-2'
@@ -183,7 +185,7 @@ export default function Header() {
             >
               Documentations
             </Link>
-            <a
+            <Link
               href='https://github.com/0php/Zero/'
               target='_blank'
               rel='noreferrer'
@@ -206,7 +208,7 @@ export default function Header() {
                 <path d='M9 18c-4.51 2-5-2-7-2' />
               </svg>
               GitHub
-            </a>
+            </Link>
           </nav>
         )}
       </div>
