@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className='bg-[#0E0E0E]'>
-      <div className='md:absolute fixed inset-0 w-screen h-full md:overflow-x-visible overflow-x-hidden'>
+      <div className='md:absolute fixed inset-0 w-screen h-full md:overflow-visible overflow-hidden'>
         <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#AD90FF] opacity-50 blur-[10vw] rotate-[105deg] top-[15vh] left-[15vw] pulse-1' />
         <div className='absolute w-[36vw] h-[36vh] rounded-full bg-[#0554CB] opacity-50 blur-[10vw] rotate-[38deg] bottom-[34vh] right-[25vw] pulse-2' />
         <div className='absolute w-[22vw] h-[36vh] rounded-full bg-[#AD90FF] opacity-50 blur-[10vw] rotate-[105deg] top-[110vh] right-[12vw] pulse-3' />

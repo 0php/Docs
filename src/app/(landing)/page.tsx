@@ -80,21 +80,23 @@ export default function HomePage() {
     'Create Project':
       os === 'windows'
         ? [
-            'Invoke-WebRequest -Uri "https://github.com/0php/Zero/archive/refs/heads/main.zip" -OutFile "main.zip"; `',
-            'Expand-Archive -Path "main.zip" -DestinationPath "." -Force; `',
-            'Remove-Item "main.zip"; `',
-            'Rename-Item "Zero-main" "my-project"; `',
-            'Set-Location "my-project"; `',
-            'Remove-Item -Recurse -Force docs, todo.md, readme.md; `',
+            'Invoke-WebRequest -Uri "https://zerophp.com/get/latest.zip" -OutFile "main.zip";',
+            'Expand-Archive -Path "main.zip" -DestinationPath "." -Force;',
+            'Remove-Item "main.zip";',
+            'Rename-Item "Zero-main" "my-project";',
+            'Set-Location "my-project";',
+            'Remove-Item -Recurse -Force docs, todo.md, readme.md; ',
+            'Copy-Item ".env.example" ".env";',
             'php zero key:generate',
           ]
         : [
-            'curl -L -o main.zip https://github.com/0php/Zero/archive/refs/heads/main.zip',
+            'curl -L -o main.zip https://zerophp.com/get/latest.zip \\',
             '&& unzip -q main.zip \\',
             '&& rm main.zip \\',
             '&& mv Zero-main my-project \\',
             '&& cd my-project \\',
             '&& rm -rf docs todo.md readme.md .git \\',
+            '&& cp .env.example .env \\',
             '&& php zero key:generate',
           ],
     'Create Model': ['php zero make:model User'],
@@ -132,12 +134,12 @@ export default function HomePage() {
           <div className='flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-12'>
             <div className='relative'>
               <div className='absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-[190px] h-[42px] bg-blue/40 blur-[32px] rounded-full' />
-              <a
-                href='#installation'
+              <Link
+                href='/installation'
                 className='inline-flex text-black items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 bg-white text-zerophp-dark font-space-grotesk px-6 py-2 rounded-[14px] hover:bg-white/90 relative z-10'
               >
                 Installation Guides
-              </a>
+              </Link>
             </div>
             <Link
               href='/docs'
@@ -150,7 +152,7 @@ export default function HomePage() {
       </section>
       {/* ... previous sections ... */}
       {/* Features Section */}
-      <section id='features' className='px-6 lg:px-[108px] py-16 lg:py-24'>
+    <section id='features' className='px-4 py-6 w-full max-w-[1224px] mx-auto py-16 lg:py-24'>
         <div className='max-w-[1224px] mx-auto'>
           <h2 className='text-center text-3xl lg:text-4xl font-bold font-space-grotesk text-styled mb-12'>
             Zero Dependencies, Rich Features
@@ -231,17 +233,20 @@ export default function HomePage() {
 
               <div className='space-y-1 font-space-grotesk text-base'>
                 <div>
-                  <div className='text-white font-bold flex flex-col gap-2 text-pretty'>
-                    {commandOutputs[selectedCommand].map((line, idx) => (
-                      <p key={idx} className='break-all'>
-                        {idx === 0 && (
-                          <span className='text-[#5972E5] font-bold'>
-                            {prompt}
-                          </span>
-                        )}
-                        {line}
-                      </p>
-                    ))}
+                  <div className='text-white font-bold text-pretty'>
+                    <p className='break-all leading-loose'>
+                      {commandOutputs[selectedCommand].map((line, idx, arr) => (
+                        <span key={`${selectedCommand}-${idx}`}>
+                          {idx === 0 && (
+                            <span className='text-[#5972E5] font-bold'>
+                              {prompt}
+                            </span>
+                          )}
+                          {line}
+                          {idx !== arr.length - 1 && <br />}
+                        </span>
+                      ))}
+                    </p>
                   </div>
                 </div>
               </div>
