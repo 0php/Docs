@@ -97,4 +97,4 @@ try {
 - Attachments and multipart/alternative payloads are not yet supported.
 - TLS verification defaults to secure settings—loosen them only for local development.
 
-Contributions are welcome! See `/docs/todo` for potential enhancements.
+Contributions are welcome! See `todo` for potential enhancements.
