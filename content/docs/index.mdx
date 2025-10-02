@@ -18,24 +18,24 @@ Zero Framework is a lightweight, native-PHP micro-framework inspired by Laravel'
 - **Helpers**: The `RegistersHelpers` trait (backed by `HelperRegistry`) wires app-specific helper classes into globally callable functions (generate stubs with `php zero make:helper`).
 - **Migrations & Seeders (DBAL)**: CLI commands (`migrate`, `make:migration`, `db:seed`) drive the migration DBAL for schema changes and database seeding.
 - **Mailing**: `Zero\Lib\Mail\Mailer` wraps SMTP delivery with fluent message composition and dotenv-driven configuration.
-- **HTTP Client**: [`Zero\Lib\Http\Http`](/docs/support#http-client) exposes a fluent, cURL-backed client for outbound requests with JSON helpers and timeout configuration.
-- **String Utilities**: [`Zero\Lib\Support\Str`](/docs/support#string-helpers) bundles common string transformations (studly, snake, camel, slug, etc.) for CLI and app code.
-- **Storage**: [`Zero\Lib\Storage\Storage`](/docs/support#storage) writes files to the configured disks; uploaded files call `$file->store()` to persist content.
+- **HTTP Client**: [`Zero\Lib\Http\Http`](support#http-client) exposes a fluent, cURL-backed client for outbound requests with JSON helpers and timeout configuration.
+- **String Utilities**: [`Zero\Lib\Support\Str`](support#string-helpers) bundles common string transformations (studly, snake, camel, slug, etc.) for CLI and app code.
+- **Storage**: [`Zero\Lib\Storage\Storage`](support#storage) writes files to the configured disks; uploaded files call `$file->store()` to persist content.
 
 ## Next Steps
 
-- Explore the [request/response lifecycle](/docs/request-response) for details on how input is captured and responses are emitted.
-- Review [routing](/docs/router) to understand grouping, middleware, and parameter binding.
-- Dive into [DBML](/docs/dbml) for building SQL queries fluently.
-- Explore the [model layer](/docs/models) to work with active-record style objects.
-- Review the [migrations guide](/docs/migrations) to learn how to shape tables, tweak charset/collation, and modify columns safely.
-- Review the [CLI tooling](/docs/cli) for scaffolding, migrations, and seeding workflows.
-- Learn how to compose templates in the [view layer](/docs/view).
-- Review the [authentication guide](/docs/auth) for protecting routes and handling sessions.
-- Learn how to send email with the [SMTP mailer](/docs/mail).
-- Browse the [CLI reference](/docs/cli) to discover available tooling.
-- Read through the [support utilities](/docs/support) for the HTTP client and string helper reference.
+- Explore the [request/response lifecycle](request-response) for details on how input is captured and responses are emitted.
+- Review [routing](router) to understand grouping, middleware, and parameter binding.
+- Dive into [DBML](dbml) for building SQL queries fluently.
+- Explore the [model layer](models) to work with active-record style objects.
+- Review the [migrations guide](migrations) to learn how to shape tables, tweak charset/collation, and modify columns safely.
+- Review the [CLI tooling](cli) for scaffolding, migrations, and seeding workflows.
+- Learn how to compose templates in the [view layer](view).
+- Review the [authentication guide](auth) for protecting routes and handling sessions.
+- Learn how to send email with the [SMTP mailer](mail).
+- Browse the [CLI reference](cli) to discover available tooling.
+- Read through the [support utilities](support) for the HTTP client and string helper reference.
 
 ## Deployment
 
-For production configuration, consult [/docs/deployment](/docs/deployment) for web server examples, environment setup, logging, and post-deploy checklists.
+For production configuration, consult [docs/deployment](deployment) for web server examples, environment setup, logging, and post-deploy checklists.
