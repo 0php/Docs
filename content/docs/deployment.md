@@ -102,7 +102,7 @@ For zero-downtime deployments, ensure migrations are idempotent and consider run
 
 Zero's task scheduler runs via the CLI (`php zero schedule:run`). Configure a cron entry so it executes every minute and let the framework decide which jobs are due.
 
-```bash
+```text
 * * * * * www-data php /var/www/zero-framework/zero schedule:run >> /var/log/zero-schedule.log 2>&1
 ```
 
@@ -120,7 +120,7 @@ Zero's task scheduler runs via the CLI (`php zero schedule:run`). Configure a cr
 4. Ensure the log directory exists and is writable by the cron user (e.g., `sudo mkdir -p /var/log && sudo chown www-data /var/log/zero-schedule.log`).
 5. Watch the log after deployment (`tail -f /var/log/zero-schedule.log`) to verify tasks run as expected.
 
-Cron only determines _when_ `schedule:run` executes—the framework handles overlap prevention and task eligibility.
+Cron only determines *when* `schedule:run` executes—the framework handles overlap prevention and task eligibility.
 
 ## Logging
 

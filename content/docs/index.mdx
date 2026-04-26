@@ -9,6 +9,7 @@ Zero Framework is a lightweight, native-PHP micro-framework inspired by Laravel'
 
 - **Entry point**: `public/index.php` bootstraps configuration, sessions, helpers, and delegates to the router.
 - **Routing**: `Zero\Lib\Router` maps request URIs to controller actions, manages middleware, and resolves controller dependencies.
+- **Controllers**: `App\Controllers\*` classes contain route handlers that accept `Request` and return any response-able value.
 - **Request lifecycle**: `Zero\Lib\Http\Request` captures query, body, JSON, headers, and files into a reusable object for the duration of the request.
 - **Request attributes**: Middleware can stash data via `Request::set()` and controllers can read it later with `Request::get()` or property access on the current instance.
 - **Response pipeline**: Controllers can return any scalar, array, object, or `Zero\Lib\Http\Response`. The router normalises these via `Response::resolve()` before sending the payload to the client.
@@ -18,14 +19,15 @@ Zero Framework is a lightweight, native-PHP micro-framework inspired by Laravel'
 - **Helpers**: The `RegistersHelpers` trait (backed by `HelperRegistry`) wires app-specific helper classes into globally callable functions (generate stubs with `php zero make:helper`).
 - **Migrations & Seeders (DBAL)**: CLI commands (`migrate`, `make:migration`, `db:seed`) drive the migration DBAL for schema changes and database seeding.
 - **Mailing**: `Zero\Lib\Mail\Mailer` wraps SMTP delivery with fluent message composition and dotenv-driven configuration.
-- **HTTP Client**: [`Zero\Lib\Http\Http`](/docs/support#http-client) exposes a fluent, cURL-backed client for outbound requests with JSON helpers and timeout configuration.
-- **String Utilities**: [`Zero\Lib\Support\Str`](/docs/support#string-helpers) bundles common string transformations (studly, snake, camel, slug, etc.) for CLI and app code.
-- **Storage**: [`Zero\Lib\Storage\Storage`](/docs/support#storage) writes files to the configured disks; uploaded files call `$file->store()` to persist content.
+- **HTTP Client**: [`Zero\Lib\Http\Http`](/docs/support/http) exposes a fluent, cURL-backed client for outbound requests with JSON helpers and timeout configuration.
+- **String Utilities**: [`Zero\Lib\Support\Str`](/docs/support/str) bundles common string transformations (studly, snake, camel, slug, etc.) for CLI and app code.
+- **Storage**: [`Zero\Lib\Storage\Storage`](/docs/storage) writes files to the configured disks; uploaded files call `$file->store()` to persist content.
 
 ## Next Steps
 
 - Explore the [request/response lifecycle](/docs/request-response) for details on how input is captured and responses are emitted.
 - Review [routing](/docs/router) to understand grouping, middleware, and parameter binding.
+- Read the [controller guide](/docs/controller) to structure actions, input handling, and response patterns.
 - Dive into [DBML](/docs/dbml) for building SQL queries fluently.
 - Explore the [model layer](/docs/models) to work with active-record style objects.
 - Review the [migrations guide](/docs/migrations) to learn how to shape tables, tweak charset/collation, and modify columns safely.
@@ -35,6 +37,38 @@ Zero Framework is a lightweight, native-PHP micro-framework inspired by Laravel'
 - Learn how to send email with the [SMTP mailer](/docs/mail).
 - Browse the [CLI reference](/docs/cli) to discover available tooling.
 - Read through the [support utilities](/docs/support) for the HTTP client and string helper reference.
+
+## Documentation Map
+
+- [Overview](/docs/overview)
+- [Request & Response](/docs/request-response)
+- [Router](/docs/router)
+- [Controller](/docs/controller)
+- [Auth](/docs/auth)
+- [View](/docs/view)
+- [DBML](/docs/dbml)
+- [Models](/docs/models)
+- [Migrations](/docs/migrations)
+- [Database Connections](/docs/database-connections)
+- [Queue](/docs/queue)
+- [Rate Limiting](/docs/rate-limiting)
+- [Storage](/docs/storage)
+- [Mail](/docs/mail)
+- [i18n](/docs/i18n)
+- [Date](/docs/date)
+- [Helpers](/docs/helpers)
+- [CLI](/docs/cli)
+- [Cron / Scheduler](/docs/cron)
+- [Deployment](/docs/deployment)
+- [Support Utilities](/docs/support)
+- [Support: Strings](/docs/support/str)
+- [Support: Stringable](/docs/support/stringable)
+- [Support: Arrays](/docs/support/arr)
+- [Support: Collection](/docs/support/collection)
+- [Support: Number](/docs/support/number)
+- [Support: HTTP Client](/docs/support/http)
+- [Support: SOAP Client](/docs/support/soap)
+- [Support: Filesystem](/docs/support/filesystem)
 
 ## Deployment
 
