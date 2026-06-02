@@ -51,34 +51,34 @@ export default function Header() {
   return (
     <header className='w-full fixed top-0 left-0 right-0 z-50 backdrop-blur-md'>
       <div className='flex justify-between items-center px-4 py-6 w-full max-w-[1224px] mx-auto relative'>
-        <div className='text-white relative text-2xl font-medium font-space-grotesk'>
-          <Link href="/">
+        <div className='text-[#222] relative text-2xl font-medium font-space-grotesk'>
+          <Link href="/" className='underline hover:no-underline'>
             ZeroPHP
           </Link>
         </div>
         <nav className='hidden lg:flex items-center gap-6'>
           <Link
             href='/#features'
-            className='text-white text font-space-grotesk underline hover:text-zerophp-purple transition-colors'
+            className='text-[#222] text font-space-grotesk underline hover:no-underline hover:text-[#555] transition-colors'
           >
             Features
           </Link>
           <Link
             href='/installation'
-            className='text-white text font-space-grotesk underline hover:text-zerophp-purple transition-colors'
+            className='text-[#222] text font-space-grotesk underline hover:no-underline hover:text-[#555] transition-colors'
           >
             Installation
           </Link>
           <Link
             href='/docs'
-            className='text-white text font-space-grotesk underline hover:text-zerophp-purple transition-colors'
+            className='text-[#222] text font-space-grotesk underline hover:no-underline hover:text-[#555] transition-colors'
           >
             Documentations
           </Link>
           <a
             href='https://github.com/0php/Zero/'
             target='_blank'
-            className='text-white hover:text-zerophp-purple transition-colors'
+            className='text-[#222] hover:text-[#555] transition-colors'
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -101,7 +101,7 @@ export default function Header() {
         <button
           type='button'
           onClick={() => setIsNavOpen((prev) => !prev)}
-          className='lg:hidden text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5972E5] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0E0E0E] rounded-md p-1'
+          className='lg:hidden text-[#222] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#222] focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-md p-1'
           aria-expanded={isNavOpen}
           aria-controls='mobile-nav'
           aria-label='Toggle navigation'
@@ -140,13 +140,13 @@ export default function Header() {
         {isNavOpen && (
           <nav
             id='mobile-nav'
-            className='lg:hidden fixed inset-0 z-50 flex flex-col gap-6 px-6 pt-16 pb-12 w-screen h-screen bg-[#0E0E0E] text-white font-space-grotesk text-lg overflow-y-auto'
+            className='lg:hidden fixed inset-0 z-50 flex flex-col gap-6 px-6 pt-16 pb-12 w-screen h-screen bg-white text-[#222] font-space-grotesk text-lg overflow-y-auto'
           >
             <div className='flex justify-end mb-6'>
               <button
                 type='button'
                 onClick={() => setIsNavOpen(false)}
-                className='p-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5972E5] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0E0E0E]'
+                className='p-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#222] focus-visible:ring-offset-2 focus-visible:ring-offset-white'
                 aria-label='Close navigation'
               >
                 <svg
@@ -166,21 +166,21 @@ export default function Header() {
             </div>
             <Link
               href='/#features'
-              className='underline underline-offset-2'
+              className='underline underline-offset-2 hover:no-underline'
               onClick={() => setIsNavOpen(false)}
             >
               Features
             </Link>
             <Link
               href='/installation'
-              className='underline underline-offset-2'
+              className='underline underline-offset-2 hover:no-underline'
               onClick={() => setIsNavOpen(false)}
             >
               Installations
             </Link>
             <Link
               href='/docs'
-              className='underline underline-offset-2'
+              className='underline underline-offset-2 hover:no-underline'
               onClick={() => setIsNavOpen(false)}
             >
               Documentations
@@ -189,7 +189,7 @@ export default function Header() {
               href='https://github.com/0php/Zero/'
               target='_blank'
               rel='noreferrer'
-              className='flex items-center gap-2 underline underline-offset-2'
+              className='flex items-center gap-2 underline underline-offset-2 hover:no-underline'
               onClick={() => setIsNavOpen(false)}
             >
               <svg

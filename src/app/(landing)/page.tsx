@@ -122,28 +122,27 @@ export default function HomePage() {
       <section className='px-6 lg:px-[155px] pb-40 pt-50 lg:py-[25vh] text-center'>
         <div className='max-w-[1131px] mx-auto'>
           <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold font-space-grotesk mb-6 leading-tight'>
-            <span className='text-white'>ZeroPHP is</span>
+            <span className='text-[#222]'>ZeroPHP is</span>
             <br />
             <span className='text-styled'>Dependency-Free Framework</span>
           </h1>
-          <p className='text-white text-xl lg:text-2xl font-space-grotesk max-w-[1131px] mx-auto mb-12 leading-relaxed'>
+          <p className='text-[#222] text-xl lg:text-2xl font-space-grotesk max-w-[1131px] mx-auto mb-12 leading-relaxed'>
             It's designed to be simple — no need to install or maintain
             third-party packages. With ZeroPHP, your applications stay lean,
             independent, no packages, no bloat.
           </p>
           <div className='flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-12'>
             <div className='relative'>
-              <div className='absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-[190px] h-[42px] bg-blue/40 blur-[32px] rounded-full' />
-              <Link
+                <Link
                 href='/installation'
-                className='inline-flex text-black items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 bg-white text-zerophp-dark font-space-grotesk px-6 py-2 rounded-[14px] hover:bg-white/90 relative z-10'
+                className='inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-10 bg-white border border-[#222] text-[#222] font-space-grotesk px-6 py-2 rounded-[14px] hover:bg-[#222]/5 underline hover:no-underline relative z-10'
               >
                 Installation Guides
               </Link>
             </div>
             <Link
               href='/docs'
-              className='text-white font-space-grotesk underline hover:text-zerophp-purple transition-colors'
+              className='text-[#222] font-space-grotesk underline hover:no-underline hover:text-[#555] transition-colors'
             >
               Read Documentations
             </Link>
@@ -163,12 +162,12 @@ export default function HomePage() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className='rounded-[20px] p-4 space-y-1 border border-[#2D2D4C] bg-[linear-gradient(120deg,rgba(22,27,38,0.10)_2.43%,rgba(14,14,14,0.20)_99.14%)]'
+                className='rounded-[20px] p-4 space-y-1 border border-[#222] bg-white'
               >
-                <h3 className='text-white font-space-grotesk text-xl lg:text-[22px] font-bold'>
+                <h3 className='text-[#222] font-space-grotesk text-xl lg:text-[22px] font-bold'>
                   {feature.title}
                 </h3>
-                <p className='text-white font-plus-jakarta text-sm leading-relaxed'>
+                <p className='text-[#222] font-plus-jakarta text-sm leading-relaxed'>
                   {feature.description}
                 </p>
               </div>
@@ -185,17 +184,17 @@ export default function HomePage() {
           <span className='text-styled'>Zero CLI</span>
         </h2>
         <div className='flex flex-col lg:flex-row md:gap-12 gap-6 mx-auto'>
-          <div className='lg:w-[20%]'>
-            <div className='flex flex-row lg:flex-col md:gap-3 gap-5 flex-nowrap overflow-y-auto pb-2'>
+          <div className='lg:w-[22%]'>
+            <div className='flex flex-row lg:flex-col gap-2 flex-nowrap overflow-y-auto pb-2'>
               {commands.map((cmd) => (
                 <button
                   key={cmd}
                   type='button'
                   onClick={() => setSelectedCommand(cmd)}
-                  className={`text-left cursor-pointer whitespace-nowrap md:text-2xl text-xl font-bold font-space-grotesk transition-colors ${
+                  className={`text-left cursor-pointer whitespace-nowrap text-lg md:text-xl font-bold font-space-grotesk transition-colors ${
                     selectedCommand === cmd
-                      ? 'text-styled'
-                      : 'text-white hover:text-styled'
+                      ? 'text-[#222] underline decoration-[#a6e22e] decoration-2 underline-offset-8'
+                      : 'text-[#555] hover:text-[#222]'
                   }`}
                 >
                   {cmd}
@@ -204,21 +203,21 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className='flex-1 rounded-[20px] border border-[#2D2D4C] bg-[linear-gradient(120deg,rgba(22,27,38,0.10)_2.43%,rgba(14,14,14,0.20)_99.14%)]'>
+          <div className='flex-1 rounded-[20px] border border-[#75715e] bg-[#272822]'>
             <div className='rounded-[20px] md:p-8 p-6'>
               <div className='flex w-full justify-between items-center mb-3'>
-                <div className='font-bold text-xl text-white capitalize'>
+                <div className='font-bold text-xl text-[#f8f8f2] capitalize'>
                   {os}
                 </div>
                 {os === 'windows' ? (
                   <div className='flex items-center gap-3 mb-5'>
-                    <span className='w-6 h-6 text-[11px] text-white border border-[#2D2D4C] flex items-center justify-center'>
+                    <span className='w-6 h-6 text-[11px] text-[#f8f8f2] border border-[#75715e] flex items-center justify-center'>
                       &#9587;
                     </span>
-                    <span className='w-6 h-6 text-[12px] border text-white border-[#2D2D4C] flex items-center justify-center'>
+                    <span className='w-6 h-6 text-[12px] border text-[#f8f8f2] border-[#75715e] flex items-center justify-center'>
                       &#10064;
                     </span>
-                    <span className='w-6 h-6 text-[11px] border text-white border-[#2D2D4C] flex items-center justify-center'>
+                    <span className='w-6 h-6 text-[11px] border text-[#f8f8f2] border-[#75715e] flex items-center justify-center'>
                       &#8212;
                     </span>
                   </div>
@@ -231,14 +230,14 @@ export default function HomePage() {
                 )}
               </div>
 
-              <div className='space-y-1 font-space-grotesk text-base'>
+              <div className='space-y-1 font-mono text-base'>
                 <div>
-                  <div className='text-white font-bold text-pretty'>
+                  <div className='text-[#f8f8f2] font-bold text-pretty'>
                     <p className='break-all leading-loose'>
                       {commandOutputs[selectedCommand].map((line, idx, arr) => (
                         <span key={`${selectedCommand}-${idx}`}>
                           {idx === 0 && (
-                            <span className='text-[#5972E5] font-bold'>
+                            <span className='text-[#a6e22e] font-bold'>
                               {prompt}
                             </span>
                           )}

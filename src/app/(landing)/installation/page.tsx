@@ -107,7 +107,7 @@ export default function InstallationPage() {
         Installation Guides
         </h1>
 
-        <h2 className="text-white mb-2">
+        <h2 className="text-[#222] mb-2">
           1. Paste the command below in terminal
         </h2>
 
@@ -116,21 +116,21 @@ export default function InstallationPage() {
             type="text"
             value={projectName}
             onChange={(e) => setProjectName(e.target.value)}
-            className='p-4 rounded-[15px] border border-[#2D2D4C] text-white placeholder:text-white/60 bg-[linear-gradient(120deg,rgba(22,27,38,0.10)_2.43%,rgba(14,14,14,0.20)_99.14%)] focus:outline-0 md:w-auto w-full'
+            className='p-4 rounded-[15px] border border-[#222] text-[#222] placeholder:text-[#222]/60 bg-white focus:outline-0 md:w-auto w-full'
             placeholder="Project Name"
           />
           <div className='relative'>
             <select
               value={effectiveOS}
               onChange={(e) => setOverrideOS(e.target.value as any)}
-              className='p-4 pr-10 rounded-[15px] border border-[#2D2D4C] text-white bg-[linear-gradient(120deg,rgba(22,27,38,0.10)_2.43%,rgba(14,14,14,0.20)_99.14%)] focus:outline-0 appearance-none md:w-auto w-full'
+              className='p-4 pr-10 rounded-[15px] border border-[#222] text-[#222] bg-white focus:outline-0 appearance-none md:w-auto w-full'
             >
-              <option className='bg-[#2D2D4C] text-white' value="windows">Windows</option>
-              <option className='bg-[#2D2D4C] text-white' value="mac">Mac</option>
-              <option className='bg-[#2D2D4C] text-white' value="linux">Linux</option>
+              <option className='bg-white text-[#222]' value="windows">Windows</option>
+              <option className='bg-white text-[#222]' value="mac">Mac</option>
+              <option className='bg-white text-[#222]' value="linux">Linux</option>
             </select>
             <svg
-              className='pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white'
+              className='pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#222]'
               width="16"
               height="16"
               viewBox="0 0 20 20"
@@ -143,24 +143,24 @@ export default function InstallationPage() {
           <button
             type="button"
             onClick={copyToClipboard}
-            className='p-4 rounded-[15px] cursor-pointer bg-white hover:bg-white/90 text-[#2D2D4C] font-space-grotesk focus:outline-0'
+            className='p-4 rounded-[15px] cursor-pointer bg-white border border-[#222] hover:bg-[#222]/5 text-[#222] font-space-grotesk underline hover:no-underline focus:outline-0'
           >
             {copied ? 'Copied!' : 'Copy Command'}
           </button>
         </div>
-        <div className='rounded-[20px] border border-[#2D2D4C] bg-[linear-gradient(120deg,rgba(22,27,38,0.10)_2.43%,rgba(14,14,14,0.20)_99.14%)] mb-8'>
+        <div className='rounded-[20px] border border-[#75715e] bg-[#272822] mb-8'>
           <div className='rounded-[20px] md:p-8 p-6'>
             <div className='flex w-full justify-between items-center mb-3'>
-              <div className='font-bold text-xl text-white capitalize'>{effectiveOS}</div>
+              <div className='font-bold text-xl text-[#f8f8f2] capitalize'>{effectiveOS}</div>
               {effectiveOS === 'windows' ? (
                 <div className='flex items-center gap-3 mb-5'>
-                  <span className='w-6 h-6 text-[11px] text-white border border-[#2D2D4C] flex items-center justify-center'>
+                  <span className='w-6 h-6 text-[11px] text-[#f8f8f2] border border-[#75715e] flex items-center justify-center'>
                     &#9587;
                   </span>
-                  <span className='w-6 h-6 text-[12px] border text-white border-[#2D2D4C] flex items-center justify-center'>
+                  <span className='w-6 h-6 text-[12px] border text-[#f8f8f2] border-[#75715e] flex items-center justify-center'>
                     &#10064;
                   </span>
-                  <span className='w-6 h-6 text-[11px] border text-white border-[#2D2D4C] flex items-center justify-center'>
+                  <span className='w-6 h-6 text-[11px] border text-[#f8f8f2] border-[#75715e] flex items-center justify-center'>
                     &#8212;
                   </span>
                 </div>
@@ -173,13 +173,13 @@ export default function InstallationPage() {
               )}
             </div>
 
-            <div className='space-y-1 font-space-grotesk text-base text-left'>
-              <div className='text-white font-bold text-pretty'>
+            <div className='space-y-1 font-mono text-base text-left'>
+              <div className='text-[#f8f8f2] font-bold text-pretty'>
                 <p className='break-all leading-loose'>
                   {commandLines.map((line, idx, arr) => (
                     <span key={idx}>
                       {idx === 0 && (
-                        <span className='text-[#5972E5] font-bold'>{installPrompt}</span>
+                        <span className='text-[#a6e22e] font-bold'>{installPrompt}</span>
                       )}
                       {line}
                       {idx !== arr.length - 1 && <br />}
@@ -191,20 +191,20 @@ export default function InstallationPage() {
           </div>
         </div>
 
-        <h2 className="text-white mb-2">2. Run the command to start dev server</h2>
-        <div className='rounded-[20px] border border-[#2D2D4C] bg-[linear-gradient(120deg,rgba(22,27,38,0.10)_2.43%,rgba(14,14,14,0.20)_99.14%)] mb-8'>
+        <h2 className="text-[#222] mb-2">2. Run the command to start dev server</h2>
+        <div className='rounded-[20px] border border-[#75715e] bg-[#272822] mb-8'>
           <div className='rounded-[20px] md:p-8 p-6'>
             <div className='flex w-full justify-between items-center mb-3'>
-              <div className='font-bold text-xl text-white capitalize'>{effectiveOS}</div>
+              <div className='font-bold text-xl text-[#f8f8f2] capitalize'>{effectiveOS}</div>
               {effectiveOS === 'windows' ? (
                 <div className='flex items-center gap-3 mb-5'>
-                  <span className='w-6 h-6 text-[11px] text-white border border-[#2D2D4C] flex items-center justify-center'>
+                  <span className='w-6 h-6 text-[11px] text-[#f8f8f2] border border-[#75715e] flex items-center justify-center'>
                     &#9587;
                   </span>
-                  <span className='w-6 h-6 text-[12px] border text-white border-[#2D2D4C] flex items-center justify-center'>
+                  <span className='w-6 h-6 text-[12px] border text-[#f8f8f2] border-[#75715e] flex items-center justify-center'>
                     &#10064;
                   </span>
-                  <span className='w-6 h-6 text-[11px] border text-white border-[#2D2D4C] flex items-center justify-center'>
+                  <span className='w-6 h-6 text-[11px] border text-[#f8f8f2] border-[#75715e] flex items-center justify-center'>
                     &#8212;
                   </span>
                 </div>
@@ -217,10 +217,10 @@ export default function InstallationPage() {
               )}
             </div>
 
-            <div className='space-y-1 font-space-grotesk text-base text-left'>
-              <div className='text-white font-bold text-pretty'>
+            <div className='space-y-1 font-mono text-base text-left'>
+              <div className='text-[#f8f8f2] font-bold text-pretty'>
                 <p className='break-all leading-loose'>
-                  <span className='text-[#5972E5] font-bold'>{devPrompt}</span>php zero serve<br />
+                  <span className='text-[#a6e22e] font-bold'>{devPrompt}</span>php zero serve<br />
                   <span>Starting PHP server in default mode...</span> <br />
                   <span>[{nowText}] PHP 8.4.12 Development Server (http://127.0.0.1:8000) started</span>
                 </p>
@@ -229,7 +229,7 @@ export default function InstallationPage() {
           </div>
         </div>
 
-        <h2 className="text-white mb-2">3. Read our <Link href="/docs/" className='underline hover:no-underline'>documentations</Link></h2>
+        <h2 className="text-[#222] mb-2">3. Read our <Link href="/docs/" className='underline hover:no-underline'>documentations</Link></h2>
       </div>
     </section>
   );
