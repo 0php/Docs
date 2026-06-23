@@ -1,6 +1,6 @@
 # Models
 
-`Zero\Lib\Model` is a lightweight active-record layer on top of [DBML](/docs/dbml). Extend it under `App\Models` to map a table, hydrate records, and declare relationships.
+`Zero\Lib\Model` is a lightweight active-record layer on top of [DBML](dbml.md). Extend it under `App\Models` to map a table, hydrate records, and declare relationships.
 
 ```php
 namespace App\Models;
@@ -19,6 +19,19 @@ class User extends Model
 Implementation: [`Model.php`](../core/libraries/Model/Model.php), [`ModelQuery.php`](../core/libraries/Model/ModelQuery.php), [`Concerns/InteractsWithRelations.php`](../core/libraries/Model/Concerns/InteractsWithRelations.php).
 
 `__call` / `__callStatic` forward unknown methods to a fresh `ModelQuery`, so `User::where(...)`, `User::orderBy(...)`, etc., all work.
+
+### Database connection
+
+By default a model uses the application's default database connection. To pin a model to another connection defined in `config/database.php`, set the instance property `$connection`:
+
+```php
+class Event extends Model
+{
+    protected ?string $connection = 'analytics';
+}
+```
+
+All reads, writes, and relation queries for that model then run on the named connection. See [Database Connections](database-connections.md#per-model-connections) for the full multi-connection guide.
 
 ---
 
@@ -280,7 +293,7 @@ $user->getRelation('posts');
 
 ## ModelQuery
 
-`ModelQuery` is the chainable builder. `__call` forwards any DBML method (`where`, `whereIn`, `orderBy`, `select`, `join`, `limit`, …) to the underlying [DBML](/docs/dbml) query — see that doc for the full set.
+`ModelQuery` is the chainable builder. `__call` forwards any DBML method (`where`, `whereIn`, `orderBy`, `select`, `join`, `limit`, …) to the underlying [DBML](dbml.md) query — see that doc for the full set.
 
 ### `->with(array|string $relations): self`
 ```php
@@ -419,4 +432,4 @@ $bindings = User::query()->where('active', 1)->getBindings();
 - **Timestamps**: `static $timestamps = true` enables `created_at`/`updated_at` auto-fill.
 - **Soft deletes**: add a `deleted_at` column and set `static $softDeletes = true`.
 
-See [dbml.md](/docs/dbml) for the full query builder surface that `ModelQuery` delegates to.
+See [dbml.md](dbml.md) for the full query builder surface that `ModelQuery` delegates to.

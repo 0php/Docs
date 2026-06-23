@@ -18,7 +18,7 @@ Global rate limiting applies automatically to **all requests** before routing. I
 ### Configuration
 
 **1. Enable in `.env`:**
-```ini
+```env
 RATE_LIMIT_ENABLED=true
 RATE_LIMIT_MAX_ATTEMPTS=60
 RATE_LIMIT_DECAY_SECONDS=60
@@ -236,7 +236,7 @@ php zero serve
 ```
 
 **2. Enable global rate limiting in `.env`:**
-```ini
+```env
 RATE_LIMIT_ENABLED=true
 RATE_LIMIT_MAX_ATTEMPTS=10
 RATE_LIMIT_DECAY_SECONDS=10
@@ -410,7 +410,7 @@ Yes, but be aware:
 
 ### Environment Variables
 
-```ini
+```env
 RATE_LIMIT_ENABLED=true              # Enable/disable global rate limiting
 RATE_LIMIT_MAX_ATTEMPTS=60           # Maximum requests allowed
 RATE_LIMIT_DECAY_SECONDS=60          # Time window in seconds

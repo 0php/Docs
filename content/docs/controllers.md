@@ -312,7 +312,7 @@ public function store(Request $request): Response
 }
 ```
 
-See [validation.md](/docs/support) for the full rule list.
+See [validation.md](support.md) for the full rule list.
 
 ---
 
@@ -448,7 +448,7 @@ public function store(Request $request): Response
 }
 ```
 
-`Storage::putFile` generates a unique filename; use `putFileAs` if you want to pin the name (e.g. `user-42.jpg`). See [storage.md](/docs/storage) for the full storage API.
+`Storage::putFile` generates a unique filename; use `putFileAs` if you want to pin the name (e.g. `user-42.jpg`). See [storage.md](storage.md) for the full storage API.
 
 For multi-file uploads:
 
@@ -519,7 +519,7 @@ public function checkout(Request $request): Response
 }
 ```
 
-See [queue.md](/docs/queue) for the full queue API.
+See [queue.md](queue.md) for the full queue API.
 
 ---
 
@@ -608,7 +608,7 @@ Router::group([
 
 The middleware applies to every route in the group; the prefix is added to every URL; the name is prepended (so `users.index` becomes `admin.users.index`).
 
-See [router.md](/docs/router) for the full router API.
+See [router.md](router.md) for the full router API.
 
 ---
 
@@ -635,7 +635,7 @@ public function testIndexReturnsOkJson(): void
 }
 ```
 
-For end-to-end coverage (full router + middleware), use the built-in dev server (`php zero serve`) and hit it with the HTTP client documented in [support/http.md](/docs/support/http).
+For end-to-end coverage (full router + middleware), use the built-in dev server (`php zero serve`) and hit it with the HTTP client documented in [support/http.md](support/http.md).
 
 ---
 

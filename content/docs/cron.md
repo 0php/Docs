@@ -325,11 +325,11 @@ Chain these alongside cadence helpers to express complex schedules (for example,
 
 Add a single cron line so the scheduler runs every minute. Substitute your PHP binary, project root, and user:
 
-```text
+```cron
 * * * * * www-data /usr/bin/php /var/www/zero-framework/zero schedule:run >> /var/log/zero-schedule.log 2>&1
 ```
 
-For full deployment steps (choosing the cron user, log destination, and verifying the install), follow the scheduler section in [`docs/deployment.md`](/docs/deployment#cron-and-scheduler).
+For full deployment steps (choosing the cron user, log destination, and verifying the install), follow the scheduler section in [`docs/deployment.md`](deployment.md#cron-and-scheduler).
 
 For quick local smoke tests, open a second terminal and run a tiny loop that calls the scheduler every minute:
 
@@ -366,7 +366,7 @@ $schedule->command('queue:work', ['--once', '--queue=default'])
     ->description('Drain default queue');
 ```
 
-See [queue.md](/docs/queue) for the full queue reference.
+See [queue.md](queue.md) for the full queue reference.
 
 ## Operating & Monitoring
 

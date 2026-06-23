@@ -77,7 +77,7 @@ All accept an optional sub-path argument and return an absolute path.
 | `collect($items = [])` | Build a `Collection` |
 | `str($value = null)` | Fluent `Stringable` (or returns the `Str` class when called with no args) |
 
-See [docs/support.md](/docs/support) for the full surface of `Str`, `Stringable`, `Arr`, `Collection`, and `Number`.
+See [docs/support.md](support.md) for the full surface of `Str`, `Stringable`, `Arr`, `Collection`, and `Number`.
 
 ### Examples
 

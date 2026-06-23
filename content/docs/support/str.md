@@ -565,7 +565,7 @@ Str::password(20); // 'Xk9!aZ.fQ$cP|7yL@vRm'
 Implementation: [`Concerns/Str/Fluent.php`](../../core/libraries/Support/Concerns/Str/Fluent.php).
 
 ### `of(string $value): Stringable`
-Begin a fluent chain. See [stringable.md](/docs/support/stringable).
+Begin a fluent chain. See [stringable.md](stringable.md).
 ```php
 Str::of('users.profile-photo')
     ->replaceLast('.', '/')

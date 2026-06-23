@@ -377,7 +377,7 @@ $schedule->command('queue:work', ['--once', '--queue=default'])
     ->description('Drain default queue');
 ```
 
-`--once` exits after a single job (or immediately if the queue is empty), so cron stays predictable. `withoutOverlapping()` prevents two minutes from running the same `queue:work` invocation in parallel. See [cron.md](/docs/cron) for scheduler details.
+`--once` exits after a single job (or immediately if the queue is empty), so cron stays predictable. `withoutOverlapping()` prevents two minutes from running the same `queue:work` invocation in parallel. See [cron.md](cron.md) for scheduler details.
 
 ### Production deployment
 

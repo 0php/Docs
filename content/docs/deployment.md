@@ -102,7 +102,7 @@ For zero-downtime deployments, ensure migrations are idempotent and consider run
 
 Zero's task scheduler runs via the CLI (`php zero schedule:run`). Configure a cron entry so it executes every minute and let the framework decide which jobs are due.
 
-```text
+```cron
 * * * * * www-data php /var/www/zero-framework/zero schedule:run >> /var/log/zero-schedule.log 2>&1
 ```
 

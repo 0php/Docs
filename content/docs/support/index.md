@@ -4,16 +4,16 @@ Zero ships a family of dependency-free helpers under `Zero\Lib\Support`. Each on
 
 | Topic | Class / namespace | Doc |
 | --- | --- | --- |
-| Strings | `Zero\Lib\Support\Str` | [str.md](/docs/support/str) |
-| Fluent strings | `Zero\Lib\Support\Stringable` (via `Str::of()` / `str()`) | [stringable.md](/docs/support/stringable) |
-| Arrays | `Zero\Lib\Support\Arr` | [arr.md](/docs/support/arr) |
-| Collections | `Zero\Lib\Support\Collection` (via `collect()`) | [collection.md](/docs/support/collection) |
-| Numbers | `Zero\Lib\Support\Number` | [number.md](/docs/support/number) |
-| Dates | `Zero\Lib\Support\Date` / `DateTime` | [../date.md](/docs/date) |
-| HTTP client | `Zero\Lib\Http` | [http.md](/docs/support/http) |
-| SOAP client | `Http::soap()` | [soap.md](/docs/support/soap) |
-| Filesystem | `Zero\Lib\Filesystem\File` | [filesystem.md](/docs/support/filesystem) |
-| Global helpers | `core/libraries/Support/Helper.php` | [../helpers.md](/docs/helpers) |
+| Strings | `Zero\Lib\Support\Str` | [str.md](str.md) |
+| Fluent strings | `Zero\Lib\Support\Stringable` (via `Str::of()` / `str()`) | [stringable.md](stringable.md) |
+| Arrays | `Zero\Lib\Support\Arr` | [arr.md](arr.md) |
+| Collections | `Zero\Lib\Support\Collection` (via `collect()`) | [collection.md](collection.md) |
+| Numbers | `Zero\Lib\Support\Number` | [number.md](number.md) |
+| Dates | `Zero\Lib\Support\Date` / `DateTime` | [../date.md](../date.md) |
+| HTTP client | `Zero\Lib\Http` | [http.md](http.md) |
+| SOAP client | `Http::soap()` | [soap.md](soap.md) |
+| Filesystem | `Zero\Lib\Filesystem\File` | [filesystem.md](filesystem.md) |
+| Global helpers | `core/libraries/Support/Helper.php` | [../helpers.md](../helpers.md) |
 
 ## Code organization
 
@@ -21,6 +21,6 @@ Zero ships a family of dependency-free helpers under `Zero\Lib\Support`. Each on
 
 The trait split mirrors the doc topic split:
 
-- **`Str`** → [Transforms](/docs/support/str#transforms), [Search](/docs/support/str#search), [Extraction](/docs/support/str#extraction), [Replacement](/docs/support/str#replacement), [Composition](/docs/support/str#composition), [Identity](/docs/support/str#identity), [Encoding](/docs/support/str#encoding), [Pluralization](/docs/support/str#pluralization), [Casing](/docs/support/str#casing), [Padding](/docs/support/str#padding), [Random](/docs/support/str#random), [Fluent](/docs/support/str#fluent)
-- **`Arr`** → [Access](/docs/support/arr#access), [Iteration](/docs/support/arr#iteration), [Shape](/docs/support/arr#shape), [Sorting](/docs/support/arr#sorting), [Tests](/docs/support/arr#tests)
-- **`Collection`** → [Building](/docs/support/collection#building), [Conversion](/docs/support/collection#conversion), [Iteration](/docs/support/collection#iteration), [Filtering](/docs/support/collection#filtering), [Querying](/docs/support/collection#querying), [Mutation](/docs/support/collection#mutation), [Slicing](/docs/support/collection#slicing), [Reshaping](/docs/support/collection#reshaping), [Set Operations](/docs/support/collection#set-operations), [Sorting](/docs/support/collection#sorting), [Aggregates](/docs/support/collection#aggregates), [Conditional](/docs/support/collection#conditional)
+- **`Str`** → [Transforms](str.md#transforms), [Search](str.md#search), [Extraction](str.md#extraction), [Replacement](str.md#replacement), [Composition](str.md#composition), [Identity](str.md#identity), [Encoding](str.md#encoding), [Pluralization](str.md#pluralization), [Casing](str.md#casing), [Padding](str.md#padding), [Random](str.md#random), [Fluent](str.md#fluent)
+- **`Arr`** → [Access](arr.md#access), [Iteration](arr.md#iteration), [Shape](arr.md#shape), [Sorting](arr.md#sorting), [Tests](arr.md#tests)
+- **`Collection`** → [Building](collection.md#building), [Conversion](collection.md#conversion), [Iteration](collection.md#iteration), [Filtering](collection.md#filtering), [Querying](collection.md#querying), [Mutation](collection.md#mutation), [Slicing](collection.md#slicing), [Reshaping](collection.md#reshaping), [Set Operations](collection.md#set-operations), [Sorting](collection.md#sorting), [Aggregates](collection.md#aggregates), [Conditional](collection.md#conditional)

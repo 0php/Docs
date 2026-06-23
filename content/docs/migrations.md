@@ -1,6 +1,6 @@
 # Migrations & Schema Builder
 
-Zero splits data tooling into two layers: **DBML** for fluent query building (see [dbml.md](/docs/dbml)), and the migration API — a lightweight DBAL for structural changes.
+Zero splits data tooling into two layers: **DBML** for fluent query building (see [dbml.md](dbml.md)), and the migration API — a lightweight DBAL for structural changes.
 
 ```php
 use Zero\Lib\DB\Schema;
@@ -314,6 +314,14 @@ php zero migrate:rollback 3       # last 3 batches
 php zero migrate:refresh          # rollback all then re-run
 php zero migrate:fresh            # drop all tables then re-run
 ```
+
+Mark migrations as already-ran without executing them — useful when adopting a legacy database whose tables already exist:
+```bash
+php zero migrate:mark create_users_table   # mark a single file
+php zero migrate:mark --all                 # mark every pending file
+```
+
+This records the migration(s) in the migrations table so `migrate` skips them. Files already recorded are left untouched.
 
 ## Transactions
 

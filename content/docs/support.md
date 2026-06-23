@@ -1,19 +1,19 @@
 # Support Utilities
 
-Zero ships a family of dependency-free helpers under `Zero\Lib\Support`. Each one has its own per-method reference page under [`docs/support/`](/docs/support).
+Zero ships a family of dependency-free helpers under `Zero\Lib\Support`. Each one has its own per-method reference page under [`docs/support/`](support/).
 
 | Topic | Class / namespace | Doc |
 | --- | --- | --- |
-| Strings | `Zero\Lib\Support\Str` | [support/str.md](/docs/support/str) |
-| Fluent strings | `Zero\Lib\Support\Stringable` | [support/stringable.md](/docs/support/stringable) |
-| Arrays | `Zero\Lib\Support\Arr` | [support/arr.md](/docs/support/arr) |
-| Collections | `Zero\Lib\Support\Collection` | [support/collection.md](/docs/support/collection) |
-| Numbers | `Zero\Lib\Support\Number` | [support/number.md](/docs/support/number) |
-| Dates | `Zero\Lib\Support\Date` / `DateTime` | [date.md](/docs/date) |
-| HTTP client | `Zero\Lib\Http` | [support/http.md](/docs/support/http) |
-| SOAP client | `Http::soap()` | [support/soap.md](/docs/support/soap) |
-| Filesystem | `Zero\Lib\Filesystem\File` | [support/filesystem.md](/docs/support/filesystem) |
-| Global helpers | `core/libraries/Support/Helper.php` | [helpers.md](/docs/helpers) |
+| Strings | `Zero\Lib\Support\Str` | [support/str.md](support/str.md) |
+| Fluent strings | `Zero\Lib\Support\Stringable` | [support/stringable.md](support/stringable.md) |
+| Arrays | `Zero\Lib\Support\Arr` | [support/arr.md](support/arr.md) |
+| Collections | `Zero\Lib\Support\Collection` | [support/collection.md](support/collection.md) |
+| Numbers | `Zero\Lib\Support\Number` | [support/number.md](support/number.md) |
+| Dates | `Zero\Lib\Support\Date` / `DateTime` | [date.md](date.md) |
+| HTTP client | `Zero\Lib\Http` | [support/http.md](support/http.md) |
+| SOAP client | `Http::soap()` | [support/soap.md](support/soap.md) |
+| Filesystem | `Zero\Lib\Filesystem\File` | [support/filesystem.md](support/filesystem.md) |
+| Global helpers | `core/libraries/Support/Helper.php` | [helpers.md](helpers.md) |
 
 ## Code organization
 

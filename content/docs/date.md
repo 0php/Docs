@@ -124,4 +124,4 @@ Date instance for the start of today.
 $today = today();
 ```
 
-See [helpers.md](/docs/helpers) for the full list of global helpers.
+See [helpers.md](helpers.md) for the full list of global helpers.
