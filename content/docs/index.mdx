@@ -19,7 +19,7 @@ Zero Framework is a lightweight, native-PHP micro-framework inspired by Laravel'
 - **Helpers**: The `RegistersHelpers` trait (backed by `HelperRegistry`) wires app-specific helper classes into globally callable functions (generate stubs with `php zero make:helper`).
 - **Migrations & Seeders (DBAL)**: CLI commands (`migrate`, `make:migration`, `db:seed`) drive the migration DBAL for schema changes and database seeding.
 - **Mailing**: `Zero\Lib\Mail\Mailer` wraps SMTP delivery with fluent message composition and dotenv-driven configuration.
-- **HTTP Client**: [`Zero\Lib\Http\Http`](/docs/support/http) exposes a fluent, cURL-backed client for outbound requests with JSON helpers and timeout configuration.
+- **HTTP Client**: [`Zero\Lib\Http`](/docs/support/http) exposes a fluent, cURL-backed client for outbound requests with JSON helpers and timeout configuration.
 - **String Utilities**: [`Zero\Lib\Support\Str`](/docs/support/str) bundles common string transformations (studly, snake, camel, slug, etc.) for CLI and app code.
 - **Storage**: [`Zero\Lib\Storage\Storage`](/docs/storage) writes files to the configured disks; uploaded files call `$file->store()` to persist content.
 
@@ -38,9 +38,18 @@ Zero Framework is a lightweight, native-PHP micro-framework inspired by Laravel'
 - Browse the [CLI reference](/docs/cli) to discover available tooling.
 - Read through the [support utilities](/docs/support) for the HTTP client and string helper reference.
 
+## Common Workflows
+
+- **Build an API endpoint** → [router](/docs/router) → [request/response](/docs/request-response) → [models](/docs/models)
+- **Add a database table** → [migrations](/docs/migrations) → [models](/docs/models)
+- **Send transactional email** → [mail](/docs/mail) → [views](/docs/view) → [i18n](/docs/i18n)
+- **Protect routes** → [auth](/docs/auth) → [router](/docs/router) → [rate limiting](/docs/rate-limiting)
+- **Process uploads** → [request/response](/docs/request-response) (`->file()`) → [storage](/docs/storage)
+- **Schedule recurring jobs** → [CLI](/docs/cli) (`make:command`) → [cron](/docs/cron)
+- **Call a third-party service** → [HTTP client](/docs/support/http) (REST) · [SOAP client](/docs/support/soap)
+
 ## Documentation Map
 
-- [Overview](/docs/overview)
 - [Request & Response](/docs/request-response)
 - [Router](/docs/router)
 - [Controllers](/docs/controllers)

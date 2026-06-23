@@ -252,7 +252,7 @@ php zero schedule:run
 Bootstraps `routes/cron.php` and executes every task whose cron expression matches the current minute. Wire it into your system's crontab once a minute:
 
 ```cron
-* * * * * cd /var/www/app && php zero schedule:run >> /dev/null 2>&1
+* * * * * cd /var/www/zero-framework && php zero schedule:run >> /dev/null 2>&1
 ```
 
 See [cron.md](cron.md) for task definitions.

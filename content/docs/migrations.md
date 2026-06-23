@@ -55,7 +55,7 @@ Schema::dropColumnIfExists('users', 'phone');
 ```
 
 ### `Schema::startTransaction(): void` / `Schema::commit(): void` / `Schema::rollback(): void`
-Wrap multiple structural changes in a transaction.
+Wrap multiple structural changes in a transaction. These alias the `Database` transaction helpers; note that some databases auto-commit certain DDL statements.
 ```php
 Schema::startTransaction();
 try {
@@ -323,25 +323,6 @@ php zero migrate:mark --all                 # mark every pending file
 
 This records the migration(s) in the migrations table so `migrate` skips them. Files already recorded are left untouched.
 
-## Transactions
-
-Schema changes can be wrapped in transactions using the `Schema` facade (aliases the `Database` transaction helpers). Note that some databases auto-commit certain DDL statements.
-
-```php
-Schema::startTransaction();
-
-try {
-    Schema::table('users', function ($table) {
-        $table->string('nickname')->nullable();
-    });
-
-    Schema::commit();
-} catch (Throwable $e) {
-    Schema::rollback();
-    throw $e;
-}
-```
-
 ## Connection Charset & Collation
 
 Driver defaults now read from your environment configuration:
@@ -407,7 +388,6 @@ Every column helper returns a `ColumnDefinition`, so you can chain modifiers suc
 ```php
 Schema::create('example', function ($table) {
     $table->id();                        // BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY
-    $table->increments('legacy_id');     // Alias of id()
     $table->integer('age');              // INT
     $table->bigInteger('views');         // BIGINT
     $table->string('name', 255);         // VARCHAR(255)
@@ -424,65 +404,6 @@ Schema::create('example', function ($table) {
     $table->timestamps();
 });
 ```
-
-### Column Modifiers
-
-- `nullable()` – mark the column nullable.
-- `default($value)` – define a default (strings are automatically quoted).
-- `unsigned()` – available on numeric types.
-- `primary()`, `unique()`, `index()` – quick index/constraint helpers.
-- `charset($charset)` – override character set for the column (MySQL only).
-- `collation($collation)` / `collate($collation)` – override the column collation (MySQL only).
-- `useCurrent()` – set TIMESTAMP columns to default to `CURRENT_TIMESTAMP`.
-- `references($column)` + `on($table)` – pair to declare foreign key targets.
-- `onDelete($action)` / `onUpdate($action)` – specify cascading behaviour for foreign keys.
-- `foreignKeyName($name)` – override the generated foreign key constraint name.
-- `change()` – alter an existing column when used inside `Schema::table()`.
-
-### Foreign Keys
-
-Chain the foreign key helpers together for clarity:
-
-```php
-Schema::table('orders', function ($table) {
-    $table->foreignId('user_id')
-        ->constrained('users')
-        ->onDelete('cascade')
-        ->onUpdate('cascade');
-});
-```
-
-Prefer the explicit helpers when you need full control over names or cascading rules:
-
-```php
-Schema::table('invoices', function ($table) {
-    $table->unsignedBigInteger('customer_id');
-
-    $table->foreignId('customer_id')
-        ->references('id')
-        ->on('customers')
-        ->onDelete('restrict')
-        ->onUpdate('cascade')
-        ->foreignKeyName('invoices_customer_fk');
-});
-```
-
-### Table Helpers
-
-- `charset($charset)` / `collation($collation)` – set table defaults (MySQL only).
-- `timestamps()` – adds `created_at` and `updated_at`.
-- `softDeletes()` – adds nullable `deleted_at`.
-- `foreignId()` + `constrained()` – declare foreign key columns succinctly.
-- `dropColumn($name)` – remove a column.
-- `renameColumn($from, $to)` – rename a column.
-- `raw($definition)` – inject custom SQL when you need something low-level.
-
-### Schema Facade Shortcuts
-
-- `Schema::create($table, $callback)` – create a table.
-- `Schema::table($table, $callback)` – alter an existing table.
-- `Schema::drop($table)` / `dropIfExists($table)` – remove tables.
-- `Schema::dropColumn($table, $column)` / `dropColumnIfExists($table, $column)` – drop columns imperatively.
 
 ## Changing Existing Columns
 

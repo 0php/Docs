@@ -77,27 +77,27 @@ All accept an optional sub-path argument and return an absolute path.
 | `collect($items = [])` | Build a `Collection` |
 | `str($value = null)` | Fluent `Stringable` (or returns the `Str` class when called with no args) |
 
-See [docs/support.md](support.md) for the full surface of `Str`, `Stringable`, `Arr`, `Collection`, and `Number`.
+See [docs/support](support/index.md) for the full surface of `Str`, `Stringable`, `Arr`, `Collection`, and `Number`.
 
 ### Examples
 
 Path helpers:
 
 ```php
-base();                         // '/var/www/app'
-base('public/index.php');       // '/var/www/app/public/index.php'
-app_path('controllers');        // '/var/www/app/app/controllers'
-core_path('bootstrap.php');     // '/var/www/app/core/bootstrap.php'
-lib_path('Http');               // '/var/www/app/core/libraries/Http'
-config_path('mail.php');        // '/var/www/app/config/mail.php'
-database_path('migrations');    // '/var/www/app/database/migrations'
-resource_path('views');         // '/var/www/app/resources/views'
-view_path('home.php');          // '/var/www/app/resources/views/home.php'
-lang_path('en');                // '/var/www/app/resources/i18n/en'
-public_path('css/app.css');     // '/var/www/app/public/css/app.css'
-storage_path('cache');          // '/var/www/app/storage/cache'
-cache_path('views');            // '/var/www/app/storage/cache/views'
-log_path('app.log');            // '/var/www/app/storage/logs/app.log'
+base();                         // '/var/www/zero-framework'
+base('public/index.php');       // '/var/www/zero-framework/public/index.php'
+app_path('controllers');        // '/var/www/zero-framework/app/controllers'
+core_path('bootstrap.php');     // '/var/www/zero-framework/core/bootstrap.php'
+lib_path('Http');               // '/var/www/zero-framework/core/libraries/Http'
+config_path('mail.php');        // '/var/www/zero-framework/config/mail.php'
+database_path('migrations');    // '/var/www/zero-framework/database/migrations'
+resource_path('views');         // '/var/www/zero-framework/resources/views'
+view_path('home.php');          // '/var/www/zero-framework/resources/views/home.php'
+lang_path('en');                // '/var/www/zero-framework/resources/i18n/en'
+public_path('css/app.css');     // '/var/www/zero-framework/public/css/app.css'
+storage_path('cache');          // '/var/www/zero-framework/storage/cache'
+cache_path('views');            // '/var/www/zero-framework/storage/cache/views'
+log_path('app.log');            // '/var/www/zero-framework/storage/logs/app.log'
 ```
 
 HTTP & framework:
@@ -158,7 +158,7 @@ __('common.welcome');                                           // translate
 __('greeting.hello', ['name' => 'Tofik']);
 
 locale();                                                       // 'en'
-locales();                                                      // ['en', 'id', 'fr']
+locales();                                                      // ['en', 'id', 'it', 'cn']
 
 set_locale('id');                                               // persist via config
 set_locale('id', persist: false);                               // runtime only

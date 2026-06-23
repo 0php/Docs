@@ -56,7 +56,9 @@ return static function (Schedule $schedule): void {
         ->description('Quarterly financial statements');
 
     // Closure helper for cache refresh at 02:00 daily.
-    $schedule->call(fn () => cache_clear())
+    $schedule->call(function () {
+            // refresh application cache
+        })
         ->dailyAt('02:00')
         ->description('Refresh application cache');
 };
@@ -107,7 +109,9 @@ $schedule->command('app:test', ['--type=manual'])->everyMinute();
 #### `$schedule->call(callable $callback, ?string $description = null): Event`
 Schedule any closure / invokable.
 ```php
-$schedule->call(fn () => cache_clear())->dailyAt('02:00');
+$schedule->call(function () {
+    // refresh application cache
+})->dailyAt('02:00');
 ```
 
 ### Cadence helpers
@@ -295,7 +299,7 @@ $schedule->command('a')->cron('*/10 * * * *');      // every 10 minutes
 | Cadence     | Helper(s)                                                                                                                                                                  |
 | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Minute      | `everyMinute()`, `everyTwoMinutes()`, `everyThreeMinutes()`, `everyFiveMinutes()`, `everyTenMinutes()`, `everyFifteenMinutes()`, `everyThirtyMinutes()`, `everyMinutes(n)` |
-| Hour        | `hourly()`, `hourlyAt(minute)`, `twiceDaily(firstHour, secondHour)`, `everyHours(n, minute = 0)`, `everySixHours()`, `everyTwelveHours()`, `everyThirtySixHours()`         |
+| Hour        | `hourly()`, `hourlyAt(minute)`, `twiceDaily(firstHour, secondHour)`, `everyHours(n, minute = 0)`, `everySixHours()`, `everyTwelveHours()`         |
 | Day         | `daily()`, `dailyAt('HH:MM')`, `weekdays('HH:MM')`, `weekends('HH:MM')`                                                                                                    |
 | Week        | `weekly()` (defaults to Monday 00:00), `weeklyOn(dayOfWeek, 'HH:MM')` where Sunday = 0                                                                                     |
 | Month       | `monthly(day = 1, 'HH:MM')`, `monthlyOn(day, 'HH:MM')`, `quarterly('HH:MM')`                                                                                               |

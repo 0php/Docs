@@ -176,7 +176,7 @@ return Response::redirect('/login', 303);
 return Response::redirectRoute('posts.show', ['id' => $post->id]);
 return Response::redirectBack('/');                    // back to referer (or fallback)
 return Response::file($absolutePath);                  // streamed inline
-return Response::download($absolutePath, 'invoice.pdf');
+return Response::file($absolutePath, [], 'invoice.pdf', 'attachment'); // force download
 ```
 
 ### Global helpers
@@ -214,27 +214,9 @@ public function store(Request $request): Response
 }
 ```
 
-### Method matrix
+### Reading input
 
-| Method | Returns |
-| --- | --- |
-| `$request->input($key, $default = null)` | Single value from query / form / JSON, in that order |
-| `$request->all()` | Merged input array |
-| `$request->has($key)` | `true` if the key exists in any source |
-| `$request->json($key = null, $default = null)` | The JSON body, or a single key from it |
-| `$request->query($key = null, $default = null)` | Query-string only |
-| `$request->method()` | `'GET'`, `'POST'`, etc. |
-| `$request->path()` | Path component of the URL |
-| `$request->uri()` | Path + query string |
-| `$request->fullUrl()` | Absolute URL of the current request |
-| `$request->ip()` | Best-effort client IP |
-| `$request->expectsJson()` | `true` if `Accept: application/json` |
-| `$request->wantsJson()` | True for `Accept: application/json` *or* `X-Requested-With: XMLHttpRequest` |
-| `$request->header($name, $default)` | A header value (null when absent) |
-| `$request->cookie($name, $default)` | A cookie value |
-| `$request->session($key = null, $default = null)` | Read from the session |
-| `$request->file($key)` | An `UploadedFile` instance (or null) |
-| `$request->files()` | Every uploaded file keyed by field name |
+Controllers call the request accessors (`input()`, `all()`, `json()`, `query()`, `header()`, `file()`, `expectsJson()`, `wantsJson()`, …) on the injected `$request`. The full method matrix — every accessor, its arguments, and return type — is the canonical reference in [request/response](/docs/request-response); consult it there rather than duplicating it here.
 
 `Request::instance()` returns the same instance from anywhere — no need to plumb it through if it's inconvenient.
 
@@ -312,8 +294,6 @@ public function store(Request $request): Response
 }
 ```
 
-See [validation.md](support.md) for the full rule list.
-
 ---
 
 ## Route parameters
@@ -361,7 +341,7 @@ use Zero\Lib\Auth\Auth;
 
 public function dashboard(): Response
 {
-    $user = Auth::user();             // null if guest
+    $user = Auth::user();             // false if guest (no valid token)
     if (! $user) {
         return Response::redirect('/login');
     }
