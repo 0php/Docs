@@ -1,10 +1,24 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Menu, X, ArrowRight, BookOpen, Terminal, Sparkles } from 'lucide-react';
+import { GithubIcon } from '@/components/icons';
 
 export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(min-width: 1024px)');
@@ -34,9 +48,7 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    if (!isNavOpen) {
-      return undefined;
-    }
+    if (!isNavOpen) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -48,170 +60,134 @@ export default function Header() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isNavOpen]);
 
+  const navLinks = [
+    { name: 'Features', href: '/#features' },
+    { name: 'CLI Tools', href: '/#cli' },
+    { name: 'Architecture', href: '/#architecture' },
+    { name: 'Installation', href: '/installation' },
+    { name: 'Documentation', href: '/docs' },
+  ];
+
   return (
-    <header className='w-full fixed top-0 left-0 right-0 z-50 backdrop-blur-md'>
-      <div className='flex justify-between items-center px-4 py-6 w-full max-w-[1224px] mx-auto relative'>
-        <div className='text-[#222] relative text-2xl font-medium font-space-grotesk'>
-          <Link href="/" className='underline hover:no-underline'>
-            ZeroPHP
-          </Link>
-        </div>
-        <nav className='hidden lg:flex items-center gap-6'>
-          <Link
-            href='/#features'
-            className='text-[#222] text font-space-grotesk underline hover:no-underline hover:text-[#555] transition-colors'
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white/85 dark:bg-neutral-950/85 backdrop-blur-xl border-b border-neutral-200/80 dark:border-neutral-800/80 shadow-xs py-3.5'
+          : 'bg-transparent py-5'
+      }`}
+    >
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between'>
+        {/* Brand Logo */}
+        <Link
+          href='/'
+          className='flex flex-col transition-opacity hover:opacity-90'
+        >
+          <div className='text-lg font-bold font-space-grotesk tracking-tight text-neutral-900 dark:text-white flex items-center gap-1 leading-none'>
+            Zero<span className='text-red-600 dark:text-red-500'>PHP</span>
+          </div>
+          <span className='text-[10px] uppercase font-mono tracking-wider text-neutral-500 font-medium mt-1'>
+            Zero Dependencies
+          </span>
+        </Link>
+
+        {/* Desktop Navigation Links */}
+        <nav className='hidden lg:flex items-center gap-1 bg-neutral-100/80 dark:bg-neutral-900/80 p-1 rounded-full border border-neutral-200/80 dark:border-neutral-800/80 backdrop-blur-md'>
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold font-space-grotesk transition-all duration-150 ${
+                  isActive
+                    ? 'bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white shadow-xs'
+                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white'
+                }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Right Action Buttons */}
+        <div className='hidden lg:flex items-center gap-2.5'>
+          <a
+            href='https://github.com/0php/Zero'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold font-space-grotesk text-neutral-700 dark:text-neutral-300 bg-neutral-100 hover:bg-neutral-200/70 dark:bg-neutral-900 dark:hover:bg-neutral-800 border border-neutral-200/80 dark:border-neutral-800 transition-colors'
           >
-            Features
-          </Link>
+            <GithubIcon className='size-3.5' />
+            <span>GitHub</span>
+          </a>
+
           <Link
             href='/installation'
-            className='text-[#222] text font-space-grotesk underline hover:no-underline hover:text-[#555] transition-colors'
+            className='inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold font-space-grotesk bg-neutral-900 hover:bg-neutral-800 text-white dark:bg-white dark:hover:bg-neutral-200 dark:text-neutral-950 transition-colors shadow-xs'
           >
-            Installation
+            <span>Get Started</span>
+            <ArrowRight className='size-3.5' />
           </Link>
-          <Link
-            href='/docs'
-            className='text-[#222] text font-space-grotesk underline hover:no-underline hover:text-[#555] transition-colors'
-          >
-            Documentations
-          </Link>
-          <a
-            href='https://github.com/0php/Zero/'
-            target='_blank'
-            className='text-[#222] hover:text-[#555] transition-colors'
-          >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='24'
-              height='24'
-              viewBox='0 0 24 24'
-              fill='none'
-              stroke='currentColor'
-              strokeWidth='2'
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              className='lucide lucide-github w-6 h-6'
-              aria-hidden='true'
-            >
-              <path d='M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4' />
-              <path d='M9 18c-4.51 2-5-2-7-2' />
-            </svg>
-          </a>
-        </nav>
+        </div>
+
+        {/* Mobile Hamburger Button */}
         <button
           type='button'
           onClick={() => setIsNavOpen((prev) => !prev)}
-          className='lg:hidden text-[#222] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#222] focus-visible:ring-offset-2 focus-visible:ring-offset-white rounded-md p-1'
+          className='lg:hidden p-2 rounded-xl text-neutral-700 dark:text-neutral-200 bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-800 focus:outline-none transition-colors'
           aria-expanded={isNavOpen}
           aria-controls='mobile-nav'
           aria-label='Toggle navigation'
         >
-          {isNavOpen ? (
-            <svg
-              className='w-6 h-6'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M6 18L18 6M6 6l12 12'
-              />
-            </svg>
-          ) : (
-            <svg
-              className='w-6 h-6'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M4 6h16M4 12h16M4 18h16'
-              />
-            </svg>
-          )}
+          {isNavOpen ? <X className='size-5' /> : <Menu className='size-5' />}
         </button>
+      </div>
 
-        {isNavOpen && (
-          <nav
-            id='mobile-nav'
-            className='lg:hidden fixed inset-0 z-50 flex flex-col gap-6 px-6 pt-16 pb-12 w-screen h-screen bg-white text-[#222] font-space-grotesk text-lg overflow-y-auto'
-          >
-            <div className='flex justify-end mb-6'>
-              <button
-                type='button'
+      {/* Mobile Drawer */}
+      {isNavOpen && (
+        <div
+          id='mobile-nav'
+          className='lg:hidden fixed inset-0 top-[60px] z-40 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-2xl px-6 py-8 flex flex-col justify-between overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-200 border-t border-neutral-200 dark:border-neutral-800'
+        >
+          <div className='flex flex-col gap-2'>
+            <span className='text-[11px] font-mono font-bold uppercase tracking-wider text-neutral-400 mb-2'>
+              Navigation
+            </span>
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
                 onClick={() => setIsNavOpen(false)}
-                className='p-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-[#222] focus-visible:ring-offset-2 focus-visible:ring-offset-white'
-                aria-label='Close navigation'
+                className='flex items-center justify-between p-3 rounded-xl text-base font-semibold font-space-grotesk text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors'
               >
-                <svg
-                  className='w-6 h-6'
-                  fill='none'
-                  stroke='currentColor'
-                  viewBox='0 0 24 24'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M6 18L18 6M6 6l12 12'
-                  />
-                </svg>
-              </button>
-            </div>
-            <Link
-              href='/#features'
-              className='underline underline-offset-2 hover:no-underline'
-              onClick={() => setIsNavOpen(false)}
-            >
-              Features
-            </Link>
+                <span>{link.name}</span>
+                <ArrowRight className='size-4 text-neutral-400' />
+              </Link>
+            ))}
+          </div>
+
+          <div className='pt-6 border-t border-neutral-200 dark:border-neutral-800 flex flex-col gap-3'>
             <Link
               href='/installation'
-              className='underline underline-offset-2 hover:no-underline'
               onClick={() => setIsNavOpen(false)}
+              className='w-full py-3.5 px-4 rounded-xl text-center font-bold text-sm font-space-grotesk bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 flex items-center justify-center gap-2 shadow-md'
             >
-              Installations
+              <Terminal className='size-4' />
+              <span>Install ZeroPHP</span>
             </Link>
-            <Link
-              href='/docs'
-              className='underline underline-offset-2 hover:no-underline'
-              onClick={() => setIsNavOpen(false)}
-            >
-              Documentations
-            </Link>
-            <Link
-              href='https://github.com/0php/Zero/'
+            <a
+              href='https://github.com/0php/Zero'
               target='_blank'
-              rel='noreferrer'
-              className='flex items-center gap-2 underline underline-offset-2 hover:no-underline'
-              onClick={() => setIsNavOpen(false)}
+              rel='noopener noreferrer'
+              className='w-full py-3 px-4 rounded-xl text-center font-semibold text-sm font-space-grotesk bg-neutral-100 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-200 border border-neutral-200 dark:border-neutral-800 flex items-center justify-center gap-2'
             >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='20'
-                height='20'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                aria-hidden='true'
-              >
-                <path d='M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4' />
-                <path d='M9 18c-4.51 2-5-2-7-2' />
-              </svg>
-              GitHub
-            </Link>
-          </nav>
-        )}
-      </div>
+              <GithubIcon className='size-4' />
+              <span>GitHub Repository</span>
+            </a>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
