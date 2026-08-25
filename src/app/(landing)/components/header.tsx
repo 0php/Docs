@@ -83,7 +83,7 @@ export default function Header() {
           className='flex flex-col transition-opacity hover:opacity-90'
         >
           <div className='text-lg font-bold font-space-grotesk tracking-tight text-neutral-900 dark:text-white flex items-center gap-1 leading-none'>
-            Zero<span className='text-red-600 dark:text-red-500'>PHP</span>
+            Zero<span className='text-blue-600 dark:text-blue-500'>PHP</span>
           </div>
           <span className='text-[10px] uppercase font-mono tracking-wider text-neutral-500 font-medium mt-1'>
             Zero Dependencies

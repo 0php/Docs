@@ -11,14 +11,14 @@ export default function Footer() {
           <div className='lg:col-span-2 space-y-4'>
             <Link href='/' className='inline-block'>
               <div className='text-xl font-bold font-space-grotesk tracking-tight text-neutral-900 dark:text-white'>
-                Zero<span className='text-red-600 dark:text-red-500'>PHP</span>
+                Zero<span className='text-blue-600 dark:text-blue-500'>PHP</span>
               </div>
             </Link>
             <p className='text-sm text-neutral-600 dark:text-neutral-400 font-sans max-w-sm leading-relaxed'>
               The lightweight, high-performance PHP framework built from the ground up with zero external dependencies. Build resilient, long-lasting apps.
             </p>
             <div className='inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800'>
-              <span className='size-1.5 rounded-full bg-red-500'></span>
+              <span className='size-1.5 rounded-full bg-blue-500'></span>
               <span>100% Standalone • PHP 8.2+</span>
             </div>
           </div>

@@ -157,7 +157,7 @@ export default function InstallationPage() {
       {/* Header */}
       <div className='text-center max-w-3xl mx-auto mb-12'>
         <div className='inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 mb-4'>
-          <span className='size-1.5 rounded-full bg-red-500'></span>
+          <span className='size-1.5 rounded-full bg-blue-500'></span>
           <span>Quick Start in &lt; 30 Seconds</span>
         </div>
         <h1 className='text-3xl sm:text-5xl font-extrabold font-space-grotesk tracking-tight text-neutral-950 dark:text-white mb-3'>
@@ -171,7 +171,7 @@ export default function InstallationPage() {
       {/* Interactive Project Configurator Card */}
       <div className='p-6 sm:p-8 rounded-2xl bg-neutral-50/60 dark:bg-neutral-900/40 border border-neutral-200/80 dark:border-neutral-800 mb-10'>
         <div className='flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-neutral-500 mb-4'>
-          <FolderPlus className='size-4 text-red-500' />
+          <FolderPlus className='size-4 text-blue-500' />
           <span>Project Configuration</span>
         </div>
 
@@ -235,7 +235,7 @@ export default function InstallationPage() {
 
         {/* Directory Output Preview */}
         <div className='mt-4 pt-4 border-t border-neutral-200/60 dark:border-neutral-800/60 flex items-center justify-between text-xs font-mono text-neutral-500'>
-          <span>Destination Folder: <span className='text-red-600 dark:text-red-500 font-semibold'>./{projectSlug}</span></span>
+          <span>Destination Folder: <span className='text-blue-600 dark:text-blue-500 font-semibold'>./{projectSlug}</span></span>
           <span className='capitalize'>Detected OS: {detectedOS}</span>
         </div>
       </div>
@@ -276,7 +276,7 @@ export default function InstallationPage() {
                 <div className='text-neutral-400 mb-2 font-sans text-xs font-medium'>
                   Step 1.{idx + 1}: {step.title}
                 </div>
-                <div className='flex items-center justify-between text-red-400'>
+                <div className='flex items-center justify-between text-blue-400'>
                   <code className='break-all'>{step.command}</code>
                 </div>
               </div>
@@ -302,8 +302,8 @@ export default function InstallationPage() {
               >
                 {copiedInstall ? (
                   <>
-                    <Check className='size-3.5 text-red-400' />
-                    <span className='text-red-400'>Copied!</span>
+                    <Check className='size-3.5 text-blue-400' />
+                    <span className='text-blue-400'>Copied!</span>
                   </>
                 ) : (
                   <>
@@ -319,7 +319,7 @@ export default function InstallationPage() {
               {commandLines.map((line, idx) => (
                 <div key={idx} className='break-all'>
                   {idx === 0 && (
-                    <span className='text-red-400 font-bold select-none mr-2'>
+                    <span className='text-blue-400 font-bold select-none mr-2'>
                       {installPrompt}
                     </span>
                   )}
@@ -362,8 +362,8 @@ export default function InstallationPage() {
             >
               {copiedServe ? (
                 <>
-                  <Check className='size-3.5 text-red-400' />
-                  <span className='text-red-400'>Copied</span>
+                  <Check className='size-3.5 text-blue-400' />
+                  <span className='text-blue-400'>Copied</span>
                 </>
               ) : (
                 <>
@@ -376,11 +376,11 @@ export default function InstallationPage() {
 
           <div className='p-6 font-mono text-xs sm:text-sm text-neutral-200 leading-relaxed text-left'>
             <div className='flex items-start gap-2 mb-2'>
-              <span className='text-red-400 font-bold select-none'>{devPrompt}</span>
+              <span className='text-blue-400 font-bold select-none'>{devPrompt}</span>
               <span className='text-white font-bold'>php zero serve</span>
             </div>
             <div className='text-neutral-400 pl-4'>Starting PHP server in default mode...</div>
-            <div className='text-red-400 pl-4 mt-1'>
+            <div className='text-blue-400 pl-4 mt-1'>
               [{nowText || '2026-08-25 12:00:00'}] PHP 8.4 Development Server (http://127.0.0.1:8000) started
             </div>
             <div className='text-neutral-500 pl-4 text-xs mt-2'>

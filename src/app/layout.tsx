@@ -27,7 +27,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       suppressHydrationWarning
     >
-      <body className='flex flex-col min-h-screen overflow-x-hidden bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 selection:bg-red-500/20 selection:text-red-700 dark:selection:text-red-300'>
+      <body className='flex flex-col min-h-screen overflow-x-hidden bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 selection:bg-blue-500/20 selection:text-blue-700 dark:selection:text-blue-300'>
         <RootProvider>{children}</RootProvider>
       </body>
     </html>

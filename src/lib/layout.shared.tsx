@@ -12,7 +12,7 @@ export function baseOptions(): BaseLayoutProps {
     nav: {
       title: (
         <span className='font-bold text-base tracking-tight font-space-grotesk text-neutral-900 dark:text-white'>
-          Zero<span className='text-red-600 dark:text-red-500'>PHP</span>
+          Zero<span className='text-blue-600 dark:text-blue-500'>PHP</span>
         </span>
       ),
     },

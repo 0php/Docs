@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className='min-h-screen bg-white dark:bg-[#0a0a0c] text-neutral-900 dark:text-neutral-100 relative selection:bg-red-500/20 selection:text-red-700 dark:selection:text-red-300'>
+    <div className='min-h-screen bg-white dark:bg-[#0a0a0c] text-neutral-900 dark:text-neutral-100 relative selection:bg-blue-500/20 selection:text-blue-700 dark:selection:text-blue-300'>
       {/* Subtle modern structural grid background */}
       <div className='pointer-events-none fixed inset-0 z-0 bg-grid-pattern opacity-50 [mask-image:radial-gradient(ellipse_at_top,black_40%,transparent_90%)]' />
 

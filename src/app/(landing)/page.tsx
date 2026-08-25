@@ -379,7 +379,7 @@ export default function HomePage() {
             href='/installation'
             className='inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors shadow-2xs mb-8 group'
           >
-            <span className='size-1.5 rounded-full bg-red-500'></span>
+            <span className='size-1.5 rounded-full bg-blue-500'></span>
             <span className='font-semibold text-neutral-900 dark:text-white'>ZeroPHP 1.0</span>
             <span className='text-neutral-300 dark:text-neutral-700'>|</span>
             <span className='text-neutral-600 dark:text-neutral-400'>Zero Dependencies Framework</span>
@@ -389,7 +389,7 @@ export default function HomePage() {
           {/* Main Hero Headline */}
           <h1 className='text-4xl sm:text-6xl lg:text-7xl font-extrabold font-space-grotesk tracking-tight leading-[1.08] mb-6 text-neutral-950 dark:text-white'>
             Zero Dependencies. <br className='hidden sm:inline' />
-            <span className='text-red-600 dark:text-red-500'>
+            <span className='text-blue-600 dark:text-blue-500'>
               Pure PHP Performance.
             </span>
           </h1>
@@ -433,7 +433,7 @@ export default function HomePage() {
           <div className='w-full max-w-xl mx-auto'>
             <div className='flex items-center justify-between bg-neutral-950 text-neutral-200 p-2 pl-4 rounded-xl border border-neutral-800 shadow-md'>
               <div className='flex items-center gap-3 overflow-hidden text-left'>
-                <span className='text-red-400 font-mono text-xs select-none font-bold'>$</span>
+                <span className='text-blue-400 font-mono text-xs select-none font-bold'>$</span>
                 <span className='font-mono text-xs truncate text-neutral-300 select-all'>
                   {selectedOS === 'windows'
                     ? 'Invoke-WebRequest https://zerophp.com/get/latest.zip -OutFile main.zip'
@@ -481,8 +481,8 @@ export default function HomePage() {
                 >
                   {copiedInstall ? (
                     <>
-                      <Check className='size-3.5 text-red-400' />
-                      <span className='hidden sm:inline text-[11px] font-sans text-red-400'>Copied</span>
+                      <Check className='size-3.5 text-blue-400' />
+                      <span className='hidden sm:inline text-[11px] font-sans text-blue-400'>Copied</span>
                     </>
                   ) : (
                     <>
@@ -507,7 +507,7 @@ export default function HomePage() {
             </div>
 
             <div className='flex flex-col items-center p-4 rounded-xl bg-neutral-50/50 dark:bg-neutral-900/30 border border-neutral-200/60 dark:border-neutral-800/60'>
-              <span className='text-2xl sm:text-3xl font-extrabold font-space-grotesk text-red-600 dark:text-red-500'>
+              <span className='text-2xl sm:text-3xl font-extrabold font-space-grotesk text-blue-600 dark:text-blue-500'>
                 &lt; 5ms
               </span>
               <span className='text-[11px] font-mono text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mt-1'>
@@ -542,11 +542,11 @@ export default function HomePage() {
       <section id='cli' className='py-20 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'>
         <div className='text-center max-w-3xl mx-auto mb-14'>
           <div className='inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 mb-4'>
-            <Terminal className='size-3.5 text-red-500' />
+            <Terminal className='size-3.5 text-blue-500' />
             <span>Built-in Command Line Engine</span>
           </div>
           <h2 className='text-3xl sm:text-4xl font-bold font-space-grotesk tracking-tight text-neutral-900 dark:text-white mb-3'>
-            Rapid Scaffolding with <span className='text-red-600 dark:text-red-500'>Zero CLI</span>
+            Rapid Scaffolding with <span className='text-blue-600 dark:text-blue-500'>Zero CLI</span>
           </h2>
           <p className='text-base text-neutral-600 dark:text-neutral-400 font-sans max-w-xl mx-auto'>
             Zero CLI delivers the developer ergonomics of modern frameworks without requiring external node or composer dependencies.
@@ -662,8 +662,8 @@ export default function HomePage() {
                   >
                     {copiedCli ? (
                       <>
-                        <Check className='size-3.5 text-red-400' />
-                        <span className='text-[11px] text-red-400 font-sans'>Copied</span>
+                        <Check className='size-3.5 text-blue-400' />
+                        <span className='text-[11px] text-blue-400 font-sans'>Copied</span>
                       </>
                     ) : (
                       <>
@@ -690,14 +690,14 @@ export default function HomePage() {
                       <div key={`${selectedCommand}-${idx}`} className='break-all'>
                         {isFirst ? (
                           <div className='flex items-start gap-2'>
-                            <span className='text-red-400 font-bold select-none shrink-0'>{prompt}</span>
+                            <span className='text-blue-400 font-bold select-none shrink-0'>{prompt}</span>
                             <span className='text-white font-semibold'>{line}</span>
                           </div>
                         ) : (
                           <div
                             className={`pl-4 ${
                               isSuccess
-                                ? 'text-red-400 font-semibold'
+                                ? 'text-blue-400 font-semibold'
                                 : isInfo
                                 ? 'text-neutral-300'
                                 : 'text-neutral-400'
@@ -713,7 +713,7 @@ export default function HomePage() {
 
                 {/* Blinking Cursor */}
                 <div className='mt-6 flex items-center gap-2 text-xs text-neutral-600 select-none'>
-                  <span className='size-2 rounded-full bg-red-500 inline-block animate-pulse'></span>
+                  <span className='size-2 rounded-full bg-blue-500 inline-block animate-pulse'></span>
                   <span>Terminal ready</span>
                 </div>
               </div>
@@ -728,11 +728,11 @@ export default function HomePage() {
       <section id='features' className='py-20 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto'>
         <div className='text-center max-w-3xl mx-auto mb-14'>
           <div className='inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 mb-4'>
-            <Boxes className='size-3.5 text-red-500' />
+            <Boxes className='size-3.5 text-blue-500' />
             <span>Comprehensive Native Architecture</span>
           </div>
           <h2 className='text-3xl sm:text-4xl font-bold font-space-grotesk tracking-tight text-neutral-900 dark:text-white mb-3'>
-            Zero Dependencies. <span className='text-red-600 dark:text-red-500'>Rich Features.</span>
+            Zero Dependencies. <span className='text-blue-600 dark:text-blue-500'>Rich Features.</span>
           </h2>
           <p className='text-base text-neutral-600 dark:text-neutral-400 font-sans max-w-2xl mx-auto'>
             Everything required to build industrial-grade web APIs, services, and applications is built right into the framework core.
@@ -788,7 +788,7 @@ export default function HomePage() {
       <section id='architecture' className='py-20 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-neutral-200/80 dark:border-neutral-800/80'>
         <div className='text-center max-w-3xl mx-auto mb-14'>
           <div className='inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 mb-4'>
-            <Code2 className='size-3.5 text-red-500' />
+            <Code2 className='size-3.5 text-blue-500' />
             <span>Intuitive Developer Experience</span>
           </div>
           <h2 className='text-3xl sm:text-4xl font-bold font-space-grotesk tracking-tight text-neutral-900 dark:text-white mb-3'>
@@ -828,8 +828,8 @@ export default function HomePage() {
             >
               {copiedCode ? (
                 <>
-                  <Check className='size-3.5 text-red-400' />
-                  <span className='text-[11px] text-red-400 font-sans'>Copied</span>
+                  <Check className='size-3.5 text-blue-400' />
+                  <span className='text-[11px] text-blue-400 font-sans'>Copied</span>
                 </>
               ) : (
                 <>
@@ -868,7 +868,7 @@ export default function HomePage() {
               <div className='font-mono text-2xl sm:text-3xl font-extrabold text-neutral-950 dark:text-white mb-1'>
                 0 MB
               </div>
-              <div className='text-xs font-mono font-semibold uppercase tracking-wider text-red-600 dark:text-red-500 mb-2'>
+              <div className='text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-500 mb-2'>
                 Vendor Footprint
               </div>
               <p className='text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed'>
@@ -880,7 +880,7 @@ export default function HomePage() {
               <div className='font-mono text-2xl sm:text-3xl font-extrabold text-neutral-950 dark:text-white mb-1'>
                 &lt; 10s
               </div>
-              <div className='text-xs font-mono font-semibold uppercase tracking-wider text-red-600 dark:text-red-500 mb-2'>
+              <div className='text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-500 mb-2'>
                 Setup & Install
               </div>
               <p className='text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed'>
@@ -892,7 +892,7 @@ export default function HomePage() {
               <div className='font-mono text-2xl sm:text-3xl font-extrabold text-neutral-950 dark:text-white mb-1'>
                 Zero
               </div>
-              <div className='text-xs font-mono font-semibold uppercase tracking-wider text-red-600 dark:text-red-500 mb-2'>
+              <div className='text-xs font-mono font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-500 mb-2'>
                 Breaking Upgrades
               </div>
               <p className='text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed'>
@@ -910,7 +910,7 @@ export default function HomePage() {
         <div className='relative overflow-hidden rounded-2xl bg-neutral-950 text-white p-8 sm:p-14 border border-neutral-800 terminal-shadow text-center'>
           <div className='relative z-10 max-w-2xl mx-auto space-y-6'>
             <div className='inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-neutral-900 text-neutral-300 border border-neutral-800'>
-              <Zap className='size-3.5 text-red-400' />
+              <Zap className='size-3.5 text-blue-400' />
               <span>Ready for Next-Gen PHP?</span>
             </div>
 
