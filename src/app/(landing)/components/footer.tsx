@@ -1,6 +1,72 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Heart, Sparkles, Terminal, BookOpen, Layers, ShieldCheck, ArrowUpRight } from 'lucide-react';
-import { GithubIcon } from '@/components/icons';
+import { useTheme } from 'next-themes';
+import { Sun, Moon, Monitor, ArrowUpRight } from 'lucide-react';
+
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className='flex items-center h-7 w-[82px] rounded-lg bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800' />
+    );
+  }
+
+  return (
+    <div
+      role='radiogroup'
+      aria-label='Theme switcher'
+      className='flex items-center p-0.5 rounded-lg bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-2xs'
+    >
+      <button
+        type='button'
+        onClick={() => setTheme('light')}
+        aria-label='Light mode'
+        title='Light mode'
+        className={`p-1 rounded-md transition-all ${
+          theme === 'light'
+            ? 'bg-white text-neutral-950 shadow-xs'
+            : 'text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200'
+        }`}
+      >
+        <Sun className='size-3.5' />
+      </button>
+      <button
+        type='button'
+        onClick={() => setTheme('dark')}
+        aria-label='Dark mode'
+        title='Dark mode'
+        className={`p-1 rounded-md transition-all ${
+          theme === 'dark'
+            ? 'bg-neutral-800 text-white shadow-xs'
+            : 'text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200'
+        }`}
+      >
+        <Moon className='size-3.5' />
+      </button>
+      <button
+        type='button'
+        onClick={() => setTheme('system')}
+        aria-label='System theme'
+        title='System theme'
+        className={`p-1 rounded-md transition-all ${
+          theme === 'system'
+            ? 'bg-white dark:bg-neutral-800 text-neutral-950 dark:text-white shadow-xs'
+            : 'text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200'
+        }`}
+      >
+        <Monitor className='size-3.5' />
+      </button>
+    </div>
+  );
+}
 
 export default function Footer() {
   return (
@@ -201,7 +267,9 @@ export default function Footer() {
             </span>
           </div>
 
-          <div className='flex items-center gap-4 font-mono text-[11px]'>
+          <div className='flex items-center gap-3 font-mono text-[11px]'>
+            <ThemeToggle />
+            <span className='text-neutral-300 dark:text-neutral-700'>|</span>
             <span className='text-neutral-400'>Open Source</span>
             <span>•</span>
             <a
